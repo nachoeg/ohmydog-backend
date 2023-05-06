@@ -1,41 +1,32 @@
-package entities;
+package org.acme.ohmydog.entities;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 
 @Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
 @Table(name = "usuarios")
-public class Usuario {
-    @Id // Indica que el atributo email es la clave primaria de la tabla de base de datos que representa esta entidad
+public class Usuario extends PanacheEntityBase {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "email", unique = true)
     private String email;
-
-    @Column(name = "contraseña")
     private String contrasena;
-
     @Column(name = "nombre")
     private String nombre;
-
     @Column(name = "apellido")
     private String apellido;
-
     @Column(name = "dni")
     private Long dni;
-
     @Column(name = "localidad")
     private String localidad;
-
     @Column(name = "direccion")
     private String direccion;
-
     @Column(name = "telefono")
     private Long telefono;
 
-    @Column(name = "perros")
-    private List<Perro> perros;
+    public Usuario() {
+    }
 
     public Usuario(String email, String contrasena, String nombre, String apellido, Long dni, String localidad,
                    String direccion, Long telefono) {
@@ -47,7 +38,10 @@ public class Usuario {
         this.localidad = localidad;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.perros = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public String getEmail() {

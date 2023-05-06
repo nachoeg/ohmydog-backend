@@ -1,10 +1,10 @@
-package services;
+package org.acme.ohmydog.services;
 
-import com.oracle.svm.core.annotate.Inject;
-import entities.Session;
-import entities.Usuario;
+import org.acme.ohmydog.entities.Sesion;
+import org.acme.ohmydog.entities.Usuario;
 import jakarta.enterprise.context.ApplicationScoped;
-import repository.UsuarioRepository;
+import jakarta.inject.Inject;
+import org.acme.ohmydog.repository.UsuarioRepository;
 
 import javax.naming.AuthenticationException;
 
@@ -12,10 +12,10 @@ import javax.naming.AuthenticationException;
 public class AuthService {
 
     @Inject
-    private UsuarioRepository usuarioRepository;
+    UsuarioRepository usuarioRepository;
 
     @Inject
-    private Session session;
+    Sesion sesion;
 
     /**
      * Recibe como parametros un email y una contraseña, llama al metodo buscarUsuarioPorEmail de usuarioRepository para buscar un usuario con el email proporcionado,
@@ -27,13 +27,13 @@ public class AuthService {
         if (usuario == null || !contrasena.equals(usuario.getContrasena())) {
             throw new AuthenticationException("Email o contraseña incorrecta");
         }
-        session.setUsuario(usuario);
+        sesion.setUsuario(usuario);
     }
 
     /**
      * Llama a la sesion actual y la borra
      */
     public void logout() {
-        session.clear();
+        sesion.clear();
     }
 }

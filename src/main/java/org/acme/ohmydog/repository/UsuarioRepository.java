@@ -1,8 +1,8 @@
-package repository;
+package org.acme.ohmydog.repository;
 
-import entities.Usuario;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.acme.ohmydog.entities.Usuario;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 @ApplicationScoped
 // PanacheRepository es una interfaz que brinda metodos de consultas para buscar y recuperar datos de la base de datos

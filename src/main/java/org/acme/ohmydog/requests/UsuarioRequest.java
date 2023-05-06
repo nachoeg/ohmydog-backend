@@ -1,4 +1,4 @@
-package requests;
+package org.acme.ohmydog.requests;
 
 public class UsuarioRequest {
     private String email;
@@ -9,6 +9,17 @@ public class UsuarioRequest {
     private String localidad;
     private String direccion;
     private Long telefono;
+
+    public UsuarioRequest(String email, String contrasena, String nombre, String apellido, Long dni, String localidad, String direccion, Long telefono) {
+        this.email = email;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.localidad = localidad;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
 
     public String getEmail() {
         return email;
@@ -40,5 +51,9 @@ public class UsuarioRequest {
 
     public Long getTelefono() {
         return telefono;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

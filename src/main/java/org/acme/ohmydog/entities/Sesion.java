@@ -1,6 +1,9 @@
-package entities;
+package org.acme.ohmydog.entities;
 
-public class Session {
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class Sesion {
     private Usuario usuario;
 
     public void setUsuario(Usuario usuario) {

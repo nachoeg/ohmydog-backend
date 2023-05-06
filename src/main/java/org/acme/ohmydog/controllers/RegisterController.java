@@ -1,14 +1,14 @@
-package controllers;
+package org.acme.ohmydog.controllers;
 
-import com.oracle.svm.core.annotate.Inject;
-import requests.UsuarioRequest;
+import jakarta.inject.Inject;
+import org.acme.ohmydog.requests.UsuarioRequest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import services.UsuarioService;
+import org.acme.ohmydog.services.UsuarioService;
 
 @Path("/register")
 @Produces(MediaType.APPLICATION_JSON)

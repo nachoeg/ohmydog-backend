@@ -1,19 +1,18 @@
-package controllers;
+package org.acme.ohmydog.controllers;
 
-import entities.Usuario;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
-import repository.UsuarioRepository;
-import com.oracle.svm.core.annotate.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import requests.UsuarioRequest;
-import services.UsuarioService;
+import org.acme.ohmydog.requests.UsuarioRequest;
+import org.acme.ohmydog.services.UsuarioService;
 
 @Path("/usuarios")
 public class UsuarioController {
 
-    @Inject // Se utiliza para decirle a Quarkus que proporcione automaticamente el objeto en la app en tiempo de ejecucion
-    private UsuarioService usuarioService;
+    @Inject
+    // Se utiliza para decirle a Quarkus que proporcione automaticamente el objeto en la app en tiempo de ejecucion
+    UsuarioService usuarioService;
 
     /**
      * Se encarga de recibir una solicitud HTTP PUT con los datos de un usuario a ser actualizado en la base de datos. El metodo recibe un parámetro de ruta que

@@ -1,23 +1,24 @@
-package services;
+package org.acme.ohmydog.services;
 
-import entities.Usuario;
+import jakarta.inject.Inject;
+import org.acme.ohmydog.entities.Usuario;
 import jakarta.transaction.Transactional;
-import repository.UsuarioRepository;
-import com.oracle.svm.core.annotate.Inject;
+import org.acme.ohmydog.repository.UsuarioRepository;
+import org.acme.ohmydog.requests.UsuarioRequest;
 import jakarta.enterprise.context.ApplicationScoped;
-import requests.UsuarioRequest;
 
 @ApplicationScoped // Asegura que el objeto se inicialice solo una vez y se reutilice en toda la aplicacion
 public class UsuarioService {
 
     @Inject
-    private UsuarioRepository usuarioRepository;
+    UsuarioRepository usuarioRepository;
 
     /**
      * Registra un nuevo usuario en la base de datos con los datos proporcionados
      * @param usuarioRequest
      * @return boolean
      */
+    @Transactional
     public boolean register(UsuarioRequest usuarioRequest) {
         if (usuarioRepository.buscarUsuarioPorEmail(usuarioRequest.getEmail()) != null) { // Verificar si el email ya existe en la base de datos
             return false; // Email ya existe
@@ -75,5 +76,4 @@ public class UsuarioService {
         usuarioRepository.eliminate(usuario); // Eliminar el usuario de la base de datos
         return true;
     }
-
 }

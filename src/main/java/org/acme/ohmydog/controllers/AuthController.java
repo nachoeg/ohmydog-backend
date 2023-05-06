@@ -1,12 +1,11 @@
-package controllers;
+package org.acme.ohmydog.controllers;
 
-import requests.LoginRequest;
-import com.oracle.svm.core.annotate.Inject;
+import jakarta.inject.Inject;
+import org.acme.ohmydog.requests.LoginRequest;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import services.AuthService;
-
+import org.acme.ohmydog.services.AuthService;
 import javax.naming.AuthenticationException;
 
 @Path("/auth") // Indica la ruta base del endpoint, en este caso /auth. Este valor va a concatenarse con la ruta especificada en el siguiente @Path
@@ -15,7 +14,7 @@ import javax.naming.AuthenticationException;
 public class AuthController {
 
     @Inject
-    private AuthService authService;
+    AuthService authService;
 
     /**
      * Recibe una solicitud de inicio de sesion (LoginRequest) que contiene las credenciales del usuario (correo electronico y contraseña). Luego, llama a un
