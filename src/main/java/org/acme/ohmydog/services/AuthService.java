@@ -24,7 +24,7 @@ public class AuthService {
      */
     public void authenticate(String email, String contrasena) throws AuthenticationException {
         Usuario usuario = usuarioRepository.buscarUsuarioPorEmail(email);
-        if (usuario == null || !contrasena.equals(usuario.getContrasena())) {
+        if (usuario == null || !contrasena.equals(usuario.getPassword())) {
             throw new AuthenticationException("Email o contraseña incorrecta");
         }
         sesion.setUsuario(usuario);

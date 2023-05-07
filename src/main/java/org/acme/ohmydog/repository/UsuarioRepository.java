@@ -1,8 +1,10 @@
 package org.acme.ohmydog.repository;
 
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.ohmydog.entities.Usuario;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
+
+import java.util.List;
 
 @ApplicationScoped
 // PanacheRepository es una interfaz que brinda metodos de consultas para buscar y recuperar datos de la base de datos
@@ -30,7 +32,7 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
      * Se encarga de crear un nuevo objeto Usuario con los datos proporcionados y persistirlo en la base de datos utilizando el metodo persist() del repositorio de
      * usuario
      * @param email
-     * @param contrasena
+     * @param password
      * @param nombre
      * @param apellido
      * @param dni
@@ -38,10 +40,10 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
      * @param direccion
      * @param telefono
      */
-    public void register(String email, String contrasena, String nombre, String apellido, Long dni,
+    public void register(String email, String password, String nombre, String apellido, Long dni,
                          String localidad, String direccion, Long telefono) {
-        Usuario usuario = new Usuario(email, contrasena, nombre, apellido, dni, localidad, direccion, telefono); // Crea un nuevo usuario con los datos proporcionados
-        this.persist(usuario); // Persiste el nuevo usuario en la base de datos
+        Usuario usuario = new Usuario(email, password, nombre, apellido, dni, localidad, direccion, telefono); // Crea un nuevo usuario con los datos proporcionados
+        persist(usuario); // Persiste el nuevo usuario en la base de datos
     }
 
     /**
@@ -49,6 +51,11 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
      * @param usuario
      */
     public void eliminate(Usuario usuario) {
-        this.delete(usuario); // Elimina el usuario de la base de datos
+        delete(usuario); // Elimina el usuario de la base de datos
     }
+
+    public List<Usuario> listarUsuarios() {
+        return listAll();
+    }
+
 }

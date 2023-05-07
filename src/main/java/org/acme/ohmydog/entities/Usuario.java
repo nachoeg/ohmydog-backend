@@ -11,12 +11,13 @@ public class Usuario extends PanacheEntityBase {
     private Long id;
     @Column(name = "email", unique = true)
     private String email;
-    private String contrasena;
+    @Column(name = "contraseña")
+    private String password;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
-    @Column(name = "dni")
+    @Column(name = "dni", unique = true)
     private Long dni;
     @Column(name = "localidad")
     private String localidad;
@@ -28,10 +29,10 @@ public class Usuario extends PanacheEntityBase {
     public Usuario() {
     }
 
-    public Usuario(String email, String contrasena, String nombre, String apellido, Long dni, String localidad,
+    public Usuario(String email, String password, String nombre, String apellido, Long dni, String localidad,
                    String direccion, Long telefono) {
         this.email = email;
-        this.contrasena = contrasena;
+        this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -48,16 +49,16 @@ public class Usuario extends PanacheEntityBase {
         return this.email;
     }
 
-    public String getContrasena() {
-        return this.contrasena;
+    public String getPassword() {
+        return this.password;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setNombre(String nombre) {

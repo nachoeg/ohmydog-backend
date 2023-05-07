@@ -4,8 +4,11 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.acme.ohmydog.entities.Usuario;
 import org.acme.ohmydog.requests.UsuarioRequest;
 import org.acme.ohmydog.services.UsuarioService;
+
+import java.util.List;
 
 @Path("/usuarios")
 public class UsuarioController {
@@ -23,11 +26,11 @@ public class UsuarioController {
      * @return Response
      */
     @PUT // Indica que se esta realizando una operación de actualizacion
-    @Path("/{id}")
+    @Path("/modify/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response modificarUsuario(@PathParam("id") Long id, UsuarioRequest usuarioRequest) { // @PathParam para obtener el valor del parametro "id" de la URL
-        if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getContrasena(), usuarioRequest.getNombre(),
+        if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(), usuarioRequest.getNombre(),
                 usuarioRequest.getApellido(), usuarioRequest.getDni(), usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono())) {
             return Response.ok().build();
         } else {
@@ -42,7 +45,7 @@ public class UsuarioController {
      * @return Response
      */
     @DELETE // Indica que se esta realizando una operacion de eliminacion
-    @Path("/{id}")
+    @Path("/delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response eliminarUsuario(@PathParam("id") Long id) {
         if (usuarioService.eliminarUsuario(id)) {
@@ -50,5 +53,16 @@ public class UsuarioController {
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
+    }
+
+    /**
+     * Devuelve una lista de todos los usuarios en la base de datos.
+     *
+     * @return Lista de usuarios
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarUsuarios() {
+        return Response.ok(usuarioService.listarUsuarios()).build();
     }
 }

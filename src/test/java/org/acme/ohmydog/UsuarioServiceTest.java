@@ -37,7 +37,7 @@ public class UsuarioServiceTest {
         // Mockear el comportamiento del repositorio
         when(usuarioRepository.buscarUsuarioPorEmail(usuarioRequest.getEmail())).thenReturn(null); // Indica que no se encontró ningún usuario con ese email
         doNothing().when(usuarioRepository).register(
-                usuarioRequest.getEmail(), usuarioRequest.getContrasena(),
+                usuarioRequest.getEmail(), usuarioRequest.getPassword(),
                 usuarioRequest.getNombre(), usuarioRequest.getApellido(),
                 usuarioRequest.getDni(), usuarioRequest.getLocalidad(),
                 usuarioRequest.getDireccion(), usuarioRequest.getTelefono()
@@ -52,7 +52,7 @@ public class UsuarioServiceTest {
         // Verificar que se hayan realizado las interacciones esperadas con el repositorio
         verify(usuarioRepository, times(1)).buscarUsuarioPorEmail(usuarioRequest.getEmail());
         verify(usuarioRepository, times(1)).register(
-                usuarioRequest.getEmail(), usuarioRequest.getContrasena(),
+                usuarioRequest.getEmail(), usuarioRequest.getPassword(),
                 usuarioRequest.getNombre(), usuarioRequest.getApellido(),
                 usuarioRequest.getDni(), usuarioRequest.getLocalidad(),
                 usuarioRequest.getDireccion(), usuarioRequest.getTelefono()

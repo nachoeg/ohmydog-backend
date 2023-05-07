@@ -2,7 +2,7 @@ package org.acme.ohmydog.requests;
 
 public class UsuarioRequest {
     private String email;
-    private String contrasena;
+    private String password;
     private String nombre;
     private String apellido;
     private Long dni;
@@ -10,9 +10,9 @@ public class UsuarioRequest {
     private String direccion;
     private Long telefono;
 
-    public UsuarioRequest(String email, String contrasena, String nombre, String apellido, Long dni, String localidad, String direccion, Long telefono) {
+    public UsuarioRequest(String email, String password, String nombre, String apellido, Long dni, String localidad, String direccion, Long telefono) {
         this.email = email;
-        this.contrasena = contrasena;
+        this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -25,8 +25,8 @@ public class UsuarioRequest {
         return email;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
     public String getNombre() {
