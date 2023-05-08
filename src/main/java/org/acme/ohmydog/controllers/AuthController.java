@@ -28,8 +28,8 @@ public class AuthController {
     @Path("/login")
     public Response login(LoginRequest loginRequest) {
         try {
-            authService.authenticate(loginRequest.getEmail(), loginRequest.getContrasena());
-            return Response.ok().build();
+            String token = authService.authenticate(loginRequest.getEmail(), loginRequest.getContrasena());
+            return Response.ok().header("Authorization", "Bearer " + token).build();
         } catch (AuthenticationException e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
