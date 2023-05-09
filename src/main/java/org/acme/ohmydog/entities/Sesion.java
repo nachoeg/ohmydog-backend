@@ -1,9 +1,12 @@
 package org.acme.ohmydog.entities;
 
-import jakarta.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
-public class Sesion {
+import jakarta.enterprise.context.SessionScoped;
+
+import java.io.Serializable;
+
+@SessionScoped
+public class Sesion implements Serializable {
     private Usuario usuario;
 
     public void setUsuario(Usuario usuario) {
@@ -11,7 +14,7 @@ public class Sesion {
     }
 
     public Usuario getUsuario() {
-        return usuario;
+        return this.usuario;
     }
 
     public void clear() {

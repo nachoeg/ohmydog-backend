@@ -80,12 +80,12 @@ public class UsuarioService {
         return true;
     }
 
-    @Transactional
     /**
      * Recupera todos los usuarios de la base de datos y los devuelve como una lista.
      *
      * @return Lista de usuarios
      */
+    @Transactional
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.listarUsuarios();
     }
