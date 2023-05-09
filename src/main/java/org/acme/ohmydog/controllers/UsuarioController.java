@@ -4,11 +4,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.acme.ohmydog.entities.Usuario;
 import org.acme.ohmydog.requests.UsuarioRequest;
 import org.acme.ohmydog.services.UsuarioService;
-
-import java.util.List;
 
 @Path("/usuarios")
 public class UsuarioController {
