@@ -6,11 +6,7 @@ import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.entities.Sesion;
 import org.acme.ohmydog.entities.Usuario;
 import javax.naming.AuthenticationException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
+import java.util.UUID;
 
 @SessionScoped
 public class AuthService {
@@ -37,19 +33,13 @@ public class AuthService {
     }
 
     /**
-     *  Genera un token JWT con una duración de validez de 12 horas.
+     *  Genera un token.
      * @param email
      * @return token
      */
     private String generateToken(String email) {
-//        LocalDateTime expirationTime = LocalDateTime.now().plusHours(12); // Token valido por 12 horas
-//        Date expirationDate = Date.from(expirationTime.atZone(ZoneId.systemDefault()).toInstant());
-//        return Jwts.builder()
-//                .setSubject(email)
-//                .setExpiration(expirationDate)
-//                .signWith(SignatureAlgorithm.HS256, "claveSecreta") // Clave secreta para firmar el token
-//                .compact();
-        return "0";
+        UUID tokenUUID = UUID.randomUUID(); // Obtener la representación en cadena del UUID
+        return tokenUUID.toString();
     }
 
     /**
@@ -64,5 +54,7 @@ public class AuthService {
     }
 
     public boolean esVeterinario() { return this.sesion.esVeterinario(); }
+
+    public boolean esCliente() { return this.sesion.esCliente(); }
 
 }
