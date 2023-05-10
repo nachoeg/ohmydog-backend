@@ -50,8 +50,8 @@ public class UsuarioController {
      */
     @PUT // Indica que se esta realizando una operación de actualizacion
     @Path("/modify/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response modificarUsuario(@HeaderParam("token") String token, @PathParam("id") Long id,
                                      UsuarioRequest usuarioRequest) { // @PathParam para obtener el valor del parametro "id" de la URL
         if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
@@ -69,12 +69,14 @@ public class UsuarioController {
     /**
      * Se encarga de recibir una solicitud HTTP DELETE con el ID de un usuario que se desea eliminar de la base de datos. El metodo llama al servicio de
      * usuario para eliminar el usuario correspondiente en la base de datos y devuelve una respuesta HTTP segun si la operacion fue exitosa o no
+     * @param token
      * @param id
      * @return Response
      */
     @DELETE // Indica que se esta realizando una operacion de eliminacion
     @Path("/delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response eliminarUsuario(@HeaderParam("token") String token, @PathParam("id") Long id) {
         if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
             if (usuarioService.eliminarUsuario(id)) {
@@ -93,6 +95,7 @@ public class UsuarioController {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response listarUsuarios(@HeaderParam("token") String token) {
         if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
             return Response.ok(usuarioService.listarUsuarios()).build();
