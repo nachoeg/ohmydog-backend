@@ -20,9 +20,19 @@ public class Sesion implements Serializable {
         return Objects.equals(this.token, token);
     }
 
-    public boolean esVeterinario() { return this.usuario.esVeterinario(); }
+    public boolean esVeterinario() {
+        if (this.usuario == null) {
+            return false;
+        }
+        return this.usuario.esVeterinario();
+    }
 
-    public boolean esCliente() { return this.usuario.esCliente(); }
+    public boolean esCliente() {
+        if (this.usuario == null) {
+            return false;
+        }
+        return this.usuario.esCliente();
+    }
 
     public Usuario getUsuario() {
         return this.usuario;

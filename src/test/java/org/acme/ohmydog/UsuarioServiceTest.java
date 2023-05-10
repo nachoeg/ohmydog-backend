@@ -43,11 +43,8 @@ public class UsuarioServiceTest {
                 usuarioRequest.getDireccion(), usuarioRequest.getTelefono(), usuarioRequest.getRol()
         ); // Indica que se espera que se llame al metodo "register" con los parametros especificados y no haga nada
 
-        // Llamar al metodo de prueba
-        boolean result = usuarioService.register(usuarioRequest);
-
         // Verificar el resultado
-        assertTrue(result); // Verifica que el resultado sea true, es decir, el usuario se registró correctamente
+        assertTrue(usuarioService.register(usuarioRequest)); // Verifica que el resultado sea true, es decir, el usuario se registró correctamente
 
         // Verificar que se hayan realizado las interacciones esperadas con el repositorio
         verify(usuarioRepository, times(1)).buscarUsuarioPorEmail(usuarioRequest.getEmail());
@@ -72,7 +69,7 @@ public class UsuarioServiceTest {
         boolean result = usuarioService.modificarUsuario(
                 usuario.getId(), "nuevo_email", "nueva_contrasena",
                 "nuevo_nombre", "nuevo_apellido", 123456789L,
-                "nueva_localidad", "nueva_direccion", 987654321L
+                "nueva_localidad", "nueva_direccion", 987654321L, "cliente"
         );
 
         // Verificar el resultado
