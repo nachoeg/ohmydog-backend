@@ -3,6 +3,8 @@ package org.acme.ohmydog.entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
 @Table(name = "usuarios")
 public class Usuario extends PanacheEntityBase {
@@ -25,12 +27,14 @@ public class Usuario extends PanacheEntityBase {
     private String direccion;
     @Column(name = "telefono")
     private Long telefono;
+    @Column(name = "rol")
+    private String rol;
 
     public Usuario() {
     }
 
     public Usuario(String email, String password, String nombre, String apellido, Long dni, String localidad,
-                   String direccion, Long telefono) {
+                   String direccion, Long telefono, String rol) {
         this.email = email;
         this.password = password;
         this.nombre = nombre;
@@ -39,7 +43,12 @@ public class Usuario extends PanacheEntityBase {
         this.localidad = localidad;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.rol = rol;
     }
+
+    public boolean esVeterinario() { return Objects.equals(this.rol, "veterinario"); }
+
+    public boolean esCliente() { return Objects.equals(this.rol, "cliente"); }
 
     public Long getId() {
         return this.id;
@@ -77,6 +86,10 @@ public class Usuario extends PanacheEntityBase {
         return this.telefono;
     }
 
+    public String getRol() {
+        return this.rol;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -107,5 +120,9 @@ public class Usuario extends PanacheEntityBase {
 
     public void setTelefono(Long telefono) {
         this.telefono = telefono;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

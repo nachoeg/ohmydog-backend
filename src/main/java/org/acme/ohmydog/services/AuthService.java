@@ -1,13 +1,13 @@
 package org.acme.ohmydog.services;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.entities.Sesion;
 import org.acme.ohmydog.entities.Usuario;
 import javax.naming.AuthenticationException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -24,15 +24,16 @@ public class AuthService {
     /**
      * Recibe como parametros un email y una contraseña, llama al metodo buscarUsuarioPorEmail de usuarioRepository para buscar un usuario con el email proporcionado,
      * si no se encuentra un usuario con ese email o si la contraseña no coincide con la del usuario encontrado, lanza una excepcion AuthenticationException con un
-     * mensaje de error. Si el usuario es encontrado y la contraseña coincide, lo agrega a la sesion actual y devuelve un token JWT.
+     * mensaje de error. Si el usuario es encontrado y la contraseña coincide, lo agrega a la sesion actual, genera un token JWT para dicha sesion y devulve la sesion.
      */
-    public String authenticate(String email, String password) throws AuthenticationException {
+    public Sesion authenticate(String email, String password) throws AuthenticationException {
         Usuario usuario = usuarioRepository.buscarUsuarioPorEmail(email);
         if (usuario == null || !usuario.getPassword().equals(password)) {
             throw new AuthenticationException("Email o contraseña incorrecta");
         }
         sesion.setUsuario(usuario);
-        return this.generateToken(email);
+        sesion.setToken(generateToken(email));
+        return sesion;
     }
 
     /**
@@ -48,7 +49,7 @@ public class AuthService {
 //                .setExpiration(expirationDate)
 //                .signWith(SignatureAlgorithm.HS256, "claveSecreta") // Clave secreta para firmar el token
 //                .compact();
-        return "";
+        return "0";
     }
 
     /**
@@ -58,11 +59,10 @@ public class AuthService {
         sesion.clear();
     }
 
-    public Usuario getUsuario() {
-        return sesion.getUsuario();
+    public boolean isLoggedIn(String token) {
+        return sesion.isLoggedIn(token);
     }
 
-    public void setSesion(Sesion sesion) {
-        this.sesion = sesion;
-    }
+    public boolean esVeterinario() { return this.sesion.esVeterinario(); }
+
 }

@@ -28,7 +28,7 @@ public class UsuarioService {
         }
         usuarioRepository.register(usuarioRequest.getEmail(), usuarioRequest.getPassword(),
                 usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
-                usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono()); // Registra el nuevo usuario en la base de datos
+                usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(), usuarioRequest.getRol()); // Registra el nuevo usuario en la base de datos
         return true;
     }
 

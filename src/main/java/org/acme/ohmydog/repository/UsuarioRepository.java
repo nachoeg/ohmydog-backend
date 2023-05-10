@@ -41,8 +41,8 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
      * @param telefono
      */
     public void register(String email, String password, String nombre, String apellido, Long dni,
-                         String localidad, String direccion, Long telefono) {
-        Usuario usuario = new Usuario(email, password, nombre, apellido, dni, localidad, direccion, telefono); // Crea un nuevo usuario con los datos proporcionados
+                         String localidad, String direccion, Long telefono, String rol) {
+        Usuario usuario = new Usuario(email, password, nombre, apellido, dni, localidad, direccion, telefono, rol); // Crea un nuevo usuario con los datos proporcionados
         persist(usuario); // Persiste el nuevo usuario en la base de datos
     }
 

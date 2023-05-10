@@ -9,8 +9,10 @@ public class UsuarioRequest {
     private String localidad;
     private String direccion;
     private Long telefono;
+    private String rol;
 
-    public UsuarioRequest(String email, String password, String nombre, String apellido, Long dni, String localidad, String direccion, Long telefono) {
+    public UsuarioRequest(String email, String password, String nombre, String apellido, Long dni, String localidad,
+                          String direccion, Long telefono, String rol) {
         this.email = email;
         this.password = password;
         this.nombre = nombre;
@@ -19,41 +21,42 @@ public class UsuarioRequest {
         this.localidad = localidad;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.rol = rol;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public String getApellido() {
-        return apellido;
+        return this.apellido;
     }
 
     public Long getDni() {
-        return dni;
+        return this.dni;
     }
 
     public String getLocalidad() {
-        return localidad;
+        return this.localidad;
     }
 
     public String getDireccion() {
-        return direccion;
+        return this.direccion;
     }
 
     public Long getTelefono() {
-        return telefono;
+        return this.telefono;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getRol() {
+        return this.rol;
     }
 }

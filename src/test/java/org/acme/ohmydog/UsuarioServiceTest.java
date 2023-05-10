@@ -32,7 +32,7 @@ public class UsuarioServiceTest {
     public void testRegister() {
         // Crear un usuario de prueba
         UsuarioRequest usuarioRequest = new UsuarioRequest("ejemplo@example.com", "123",
-                "Usuario", "1", 123L, "Localidad", "Direccion", 123L);
+                "Usuario", "1", 123L, "Localidad", "Direccion", 123L, "cliente");
 
         // Mockear el comportamiento del repositorio
         when(usuarioRepository.buscarUsuarioPorEmail(usuarioRequest.getEmail())).thenReturn(null); // Indica que no se encontró ningún usuario con ese email
@@ -40,7 +40,7 @@ public class UsuarioServiceTest {
                 usuarioRequest.getEmail(), usuarioRequest.getPassword(),
                 usuarioRequest.getNombre(), usuarioRequest.getApellido(),
                 usuarioRequest.getDni(), usuarioRequest.getLocalidad(),
-                usuarioRequest.getDireccion(), usuarioRequest.getTelefono()
+                usuarioRequest.getDireccion(), usuarioRequest.getTelefono(), usuarioRequest.getRol()
         ); // Indica que se espera que se llame al metodo "register" con los parametros especificados y no haga nada
 
         // Llamar al metodo de prueba
@@ -55,7 +55,7 @@ public class UsuarioServiceTest {
                 usuarioRequest.getEmail(), usuarioRequest.getPassword(),
                 usuarioRequest.getNombre(), usuarioRequest.getApellido(),
                 usuarioRequest.getDni(), usuarioRequest.getLocalidad(),
-                usuarioRequest.getDireccion(), usuarioRequest.getTelefono()
+                usuarioRequest.getDireccion(), usuarioRequest.getTelefono(), usuarioRequest.getRol()
         );
     }
 
