@@ -47,7 +47,7 @@ public class UsuarioService {
      */
     @Transactional
     public boolean modificarUsuario(Long id, String email, String password, String nombre, String apellido, Long dni,
-                                    String localidad, String direccion, Long telefono) {
+                                    String localidad, String direccion, Long telefono, String rol) {
         Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
         if (usuario == null) {
             return false; // No se encontró el usuario con el id especificado
@@ -60,6 +60,7 @@ public class UsuarioService {
         usuario.setLocalidad(localidad);
         usuario.setDireccion(direccion);
         usuario.setTelefono(telefono);
+        usuario.setRol(rol);
         usuarioRepository.persist(usuario); // Actualizar el usuario en la base de datos
         return true;
     }

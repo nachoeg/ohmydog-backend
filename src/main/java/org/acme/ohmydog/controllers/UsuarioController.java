@@ -57,7 +57,8 @@ public class UsuarioController {
         if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
             if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(),
                     usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
-                    usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono())) {
+                    usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(),
+                    usuarioRequest.getRol())) {
                 return Response.ok().build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
