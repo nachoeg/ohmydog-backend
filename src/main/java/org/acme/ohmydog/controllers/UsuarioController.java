@@ -11,8 +11,7 @@ import org.acme.ohmydog.services.UsuarioService;
 @Path("/usuarios")
 public class UsuarioController {
 
-    @Inject
-    // Se utiliza para decirle a Quarkus que proporcione automaticamente el objeto en la app en tiempo de ejecucion
+    @Inject // Se utiliza para decirle a Quarkus que proporcione automaticamente el objeto en la app en tiempo de ejecucion
     UsuarioService usuarioService;
 
     @Inject
