@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
-@Table(name = "USUARIOS")
+@Table(name = "USUARIO")
 public class Usuario extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
