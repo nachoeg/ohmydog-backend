@@ -3,10 +3,11 @@ package org.acme.ohmydog.entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
-@Table(name = "usuarios")
+@Table(name = "USUARIOS")
 public class Usuario extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +30,7 @@ public class Usuario extends PanacheEntityBase {
     private Long telefono;
     @Column(name = "rol")
     private String rol;
+//    private List<Perro> perros;
 
     public Usuario() {
     }
@@ -89,6 +91,12 @@ public class Usuario extends PanacheEntityBase {
     public String getRol() {
         return this.rol;
     }
+
+//    public List<Turno> getTurnos() {
+//        return this.perros.stream()
+//                .map(perro -> perro.getTurnos)
+//                .collectToList();
+//    }
 
     public void setEmail(String email) {
         this.email = email;

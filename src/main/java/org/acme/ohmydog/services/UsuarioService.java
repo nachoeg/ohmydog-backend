@@ -3,6 +3,7 @@ package org.acme.ohmydog.services;
 import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.entities.Usuario;
 import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.UsuarioRequest;
@@ -90,4 +91,9 @@ public class UsuarioService {
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.listarUsuarios();
     }
+
+//    @Transactional
+//    public List<Turno> listarTurnos(Usuario usuario) {
+//        return usuario.getTurnos();
+//    }
 }

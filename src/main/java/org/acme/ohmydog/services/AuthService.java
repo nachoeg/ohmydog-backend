@@ -57,4 +57,6 @@ public class AuthService {
 
     public boolean esCliente() { return this.sesion.esCliente(); }
 
+    public Usuario getUsuario() { return this.sesion.getUsuario(); }
+
 }

@@ -102,4 +102,15 @@ public class UsuarioController {
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
+
+//    @GET
+//    @Path("/turnos")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response listarTurnos(@HeaderParam("token") String token) {
+//        if (authService.isLoggedIn(token) && (authService.esCliente())) {
+//            return Response.ok(usuarioService.listarTurnos(authService.getUsuario())).build();
+//        }
+//        return Response.status(Response.Status.UNAUTHORIZED).build();
+//    }
 }
