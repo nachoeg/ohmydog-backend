@@ -5,6 +5,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.ohmydog.entities.Usuario;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 // PanacheRepository es una interfaz que brinda metodos de consultas para buscar y recuperar datos de la base de datos
@@ -55,7 +57,9 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
     }
 
     public List<Usuario> listarUsuarios() {
-        return listAll();
+        return listAll().stream()
+                .filter(usuario -> Objects.equals(usuario.getRol(), "cliente"))
+                .collect(Collectors.toList());
     }
 
 }

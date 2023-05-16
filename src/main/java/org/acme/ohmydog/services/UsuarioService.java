@@ -10,6 +10,7 @@ import org.acme.ohmydog.requests.UsuarioRequest;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped // Asegura que el objeto se inicialice solo una vez y se reutilice en toda la aplicacion
 public class UsuarioService {
