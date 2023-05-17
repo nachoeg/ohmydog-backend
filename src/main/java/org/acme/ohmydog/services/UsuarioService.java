@@ -7,10 +7,7 @@ import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.entities.Usuario;
 import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.UsuarioRequest;
-
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped // Asegura que el objeto se inicialice solo una vez y se reutilice en toda la aplicacion
 public class UsuarioService {
@@ -34,14 +31,6 @@ public class UsuarioService {
         return true;
     }
 
-    /**
-     * Recibe los parámetros para modificar un usuario ya existente en la base de datos.
-     * @param email
-     * @param localidad
-     * @param direccion
-     * @param telefono
-     * @return
-     */
     @Transactional
     public boolean modificarUsuario(Long id, String email, String password, String nombre, String apellido, Long dni,
                                     String localidad, String direccion, Long telefono, String rol) {
