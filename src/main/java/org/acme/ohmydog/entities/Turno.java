@@ -27,7 +27,7 @@ public class Turno extends PanacheEntityBase {
         //this.perro = perro;
         this.fecha = fecha;
         this.motivo = motivo;
-        this.estado = "Pendiente";
+        this.estado = "pendiente";
     }
 
 //    public String getPerro() {

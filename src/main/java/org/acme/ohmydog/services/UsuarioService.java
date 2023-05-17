@@ -36,33 +36,22 @@ public class UsuarioService {
 
     /**
      * Recibe los parámetros para modificar un usuario ya existente en la base de datos.
-     * @param id
      * @param email
-     * @param password
-     * @param nombre
-     * @param apellido
-     * @param dni
      * @param localidad
      * @param direccion
      * @param telefono
      * @return
      */
     @Transactional
-    public boolean modificarUsuario(Long id, String email, String password, String nombre, String apellido, Long dni,
-                                    String localidad, String direccion, Long telefono, String rol) {
-        Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
-        if (usuario == null) {
-            return false; // No se encontró el usuario con el id especificado
+    public boolean modificarUsuario(Long dni, String email, String localidad, String direccion, Long telefono) {
+        Usuario usuario = usuarioRepository.buscarUsuarioPorDni(dni);
+        if ((usuario == null) || (usuarioRepository.verificarEmail(email))) {
+            return false; // No se encontró el usuario con el dni especificado o el email dado ya existe en la base de datos.
         }
         usuario.setEmail(email);
-        usuario.setPassword(password);
-        usuario.setNombre(nombre);
-        usuario.setApellido(apellido);
-        usuario.setDni(dni);
         usuario.setLocalidad(localidad);
         usuario.setDireccion(direccion);
         usuario.setTelefono(telefono);
-        usuario.setRol(rol);
         usuarioRepository.persist(usuario); // Actualizar el usuario en la base de datos
         return true;
     }
