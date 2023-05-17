@@ -43,17 +43,23 @@ public class UsuarioService {
      * @return
      */
     @Transactional
-    public boolean modificarUsuario(Long dni, String email, String localidad, String direccion, Long telefono) {
-        Usuario usuario = usuarioRepository.buscarUsuarioPorDni(dni);
-        if ((usuario == null) || (usuarioRepository.verificarEmail(email))) {
-            return false; // No se encontró el usuario con el dni especificado o el email dado ya existe en la base de datos.
+    public boolean modificarUsuario(Long id, String email, String password, String nombre, String apellido, Long dni,
+                                    String localidad, String direccion, Long telefono, String rol) {
+        Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
+        if (usuario == null) {
+            return false; // No se encontró el usuario con el id especificado
         }
-        usuario.setEmail(email);
-        usuario.setLocalidad(localidad);
-        usuario.setDireccion(direccion);
-        usuario.setTelefono(telefono);
-        usuarioRepository.persist(usuario); // Actualizar el usuario en la base de datos
-        return true;
+            usuario.setEmail(email);
+            usuario.setPassword(password);
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setDni(dni);
+            usuario.setLocalidad(localidad);
+            usuario.setDireccion(direccion);
+            usuario.setTelefono(telefono);
+            usuario.setRol(rol);
+            usuarioRepository.persist(usuario); // Actualizar el usuario en la base de datos
+            return true;
     }
 
     /**

@@ -30,14 +30,6 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return find("id", id).firstResult();
     }
 
-    public Usuario buscarUsuarioPorDni(Long dni) {
-        return find("id", dni).firstResult();
-    }
-
-    public boolean verificarEmail(String email) {
-        return find("email", email).firstResult() == null;
-    }
-
     /**
      * Se encarga de crear un nuevo objeto Usuario con los datos proporcionados y persistirlo en la base de datos utilizando el metodo persist() del repositorio de
      * usuario

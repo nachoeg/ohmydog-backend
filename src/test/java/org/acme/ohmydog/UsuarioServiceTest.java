@@ -66,8 +66,11 @@ public class UsuarioServiceTest {
         doNothing().when(usuarioRepository).persist(usuario); // Indica que se espera que se llame al método "persist" con el usuario especificado y no haga nada
 
         // Llamar al metodo de prueba
-        boolean result = usuarioService.modificarUsuario(987654321L,"nuevo_email", "nueva_localidad",
-                "nueva_direccion", 123456789L);
+        boolean result = usuarioService.modificarUsuario(
+                usuario.getId(), "nuevo_email", "nueva_contrasena",
+                "nuevo_nombre", "nuevo_apellido", 123456789L,
+                "nueva_localidad", "nueva_direccion", 987654321L, "cliente"
+        );
 
         // Verificar el resultado
         assertTrue(result); // Verifica que el resultado sea true, es decir, el usuario se modificó correctamente

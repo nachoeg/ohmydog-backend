@@ -4,7 +4,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.acme.ohmydog.requests.ModifyRequest;
 import org.acme.ohmydog.requests.UsuarioRequest;
 import org.acme.ohmydog.services.AuthService;
 import org.acme.ohmydog.services.UsuarioService;
@@ -44,17 +43,20 @@ public class UsuarioController {
      * Se encarga de recibir una solicitud HTTP PUT con los datos de un usuario a ser actualizado en la base de datos. El metodo recibe un parámetro de ruta que
      * representa el ID del usuario a actualizar y un objeto UsuarioRequest que contiene los nuevos datos del usuario y llama al servicio de usuario para modificar
      * el usuario correspondiente en la base de datos. Devuelve una respuesta HTTP segun si la operacion fue exitosa o no
-     * @param modifyRequest
+     * @param usuarioRequest
      * @return Response
      */
     @PUT // Indica que se esta realizando una operación de actualizacion
     @Path("/modify/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response modificarUsuario(@HeaderParam("token") String token, ModifyRequest modifyRequest) {
-        if (authService.isLoggedIn(token)) {
-            if (usuarioService.modificarUsuario(modifyRequest.getDni(), modifyRequest.getEmail(), modifyRequest.getLocalidad(),
-                    modifyRequest.getDireccion(), modifyRequest.getTelefono())) {
+    public Response modificarUsuario(@HeaderParam("token") String token, @PathParam("id") Long id,
+                                     UsuarioRequest usuarioRequest) { // @PathParam para obtener el valor del parametro "id" de la URL
+        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
+            if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(),
+                    usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
+                    usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(),
+                    usuarioRequest.getRol())) {
                 return Response.ok().build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
