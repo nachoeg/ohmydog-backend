@@ -52,17 +52,21 @@ public class UsuarioController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response modificarUsuario(@HeaderParam("token") String token, @PathParam("id") Long id,
                                      UsuarioRequest usuarioRequest) { // @PathParam para obtener el valor del parametro "id" de la URL
-        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
-            if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(),
-                    usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
-                    usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(),
-                    usuarioRequest.getRol())) {
-                return Response.ok().build();
-            } else {
-                return Response.status(Response.Status.BAD_REQUEST).build();
+        try {
+            if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
+                if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(),
+                        usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
+                        usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(),
+                        usuarioRequest.getRol())) {
+                    return Response.ok().build();
+                } else {
+                    return Response.status(Response.Status.BAD_REQUEST).build();
+                }
             }
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
-        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
     /**
