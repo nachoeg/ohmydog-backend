@@ -9,7 +9,9 @@ public class Turno extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //private String perro;
+
+    @Column(name = "idPerro")
+    private Long idPerro;
     @Column(name = "fecha")
     private LocalDate fecha;
     @Column(name = "motivo")
@@ -20,16 +22,18 @@ public class Turno extends PanacheEntityBase {
 
     public Turno() {
     }
-    public Turno(LocalDate fecha, String motivo) {
-        //this.perro = perro;
+
+    public Turno(Long idPerro, LocalDate fecha, String motivo) {
+        this.idPerro = idPerro;
         this.fecha = fecha;
         this.motivo = motivo;
         this.estado = "pendiente";
     }
 
-    //    public String getPerro() {
-    //        return this.perro;
-    //    }
+    public Long getIdPerro() {
+        return this.idPerro;
+    }
+
     public LocalDate getFecha() {
         return this.fecha;
     }
@@ -41,9 +45,9 @@ public class Turno extends PanacheEntityBase {
         return this.estado;
     }
 
-    //    public void setPerro(String perro) {
-    //        this.perro = perro;
-    //    }
+    public void setIdPerro(Long idPerro) {
+        this.idPerro = idPerro;
+    }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;

@@ -2,6 +2,8 @@ package org.acme.ohmydog.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,11 +32,9 @@ public class Usuario extends PanacheEntityBase {
     private Long telefono;
     @Column(name = "rol")
     private String rol;
-
-    // Define una relacion "uno a muchos" con el usuario y sus perros
-    // No hace falta iniciarlizarla porque quarkus se encarga de ello.
-    @OneToMany(cascade = CascadeType.ALL) 
-    private List<Perro> listaPerros;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id")
+    private List<Perro> perros;
 
     public Usuario() {
     }
@@ -50,30 +50,31 @@ public class Usuario extends PanacheEntityBase {
         this.direccion = direccion;
         this.telefono = telefono;
         this.rol = rol;
+        this.perros = new ArrayList<>();
     }
 
     public boolean esVeterinario() { return Objects.equals(this.rol, "veterinario"); }
 
     public boolean esCliente() { return Objects.equals(this.rol, "cliente"); }
 
-    public List<Perro> getListaPerros(){
-        return this.listaPerros;
+    public void agregarPerro(Perro perro) {
+        this.perros.add(perro);
     }
 
-    // Funcionalidades extra para administrar los perros
-    public Perro getPerroPorNombre(String nombre){
-        for (Perro perro : this.listaPerros) {
-            if (perro.getNombre().equals(nombre)) 
-                // El nombre coincide, existe un perro con ese nombre
-                return perro;
-        }
-        return null;
+    public boolean eliminarPerro(Perro perro) {
+        return this.perros.remove(perro);
     }
 
-    public boolean eliminarPerro(Perro perro){
-        return this.listaPerros.remove(perro);
-    }
-    // Fin de funcionalidades extra para administrar los perros
+//
+//    // Funcionalidades extra para administrar los perros
+//    public Perro getPerroPorNombre(String nombre){
+//        for (Perro perro : this.listaPerros) {
+//            if (perro.getNombre().equals(nombre))
+//                // El nombre coincide, existe un perro con ese nombre
+//                return perro;
+//        }
+//        return null;
+//    }
 
     public Long getId() {
         return this.id;
@@ -115,6 +116,10 @@ public class Usuario extends PanacheEntityBase {
         return this.rol;
     }
 
+    public List<Perro> getPerros(){
+        return this.perros;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -151,13 +156,4 @@ public class Usuario extends PanacheEntityBase {
         this.rol = rol;
     }
 
-    public void agregarPerro(Perro perro){
-        this.listaPerros.add(listaPerros.size(), perro); // Lo agrega al final de la lista
-    }
-
-    //    public List<Turno> getTurnos() {
-    //        return this.perros.stream()
-    //                .map(perro -> perro.getTurnos)
-    //                .collectToList();
-    //    }
 }

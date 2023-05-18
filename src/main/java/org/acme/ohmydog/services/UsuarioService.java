@@ -4,7 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.acme.ohmydog.entities.Usuario;
-import org.acme.ohmydog.entities.Perro;
+//import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.UsuarioRequest;
@@ -93,14 +93,14 @@ public class UsuarioService {
         return usuarioRepository.listarUsuarios();
     }
 
-    /**
-     * Devuelve los perros del usuario en una lista
-     * @return Lista de perros
-     */
-    @Transactional
-    public List<Perro> listarPerrosDelUsuario(Long id) {
-        return usuarioRepository.listarPerrosDelUsuario(id);
-    }
+//    /**
+//     * Devuelve los perros del usuario en una lista
+//     * @return Lista de perros
+//     */
+//    @Transactional
+//    public List<Perro> listarPerrosDelUsuario(Long id) {
+//        return usuarioRepository.listarPerrosDelUsuario(id);
+//    }
 
     //    @Transactional
     //    public List<Turno> listarTurnos(Usuario usuario) {

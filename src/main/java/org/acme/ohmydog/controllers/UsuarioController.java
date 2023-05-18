@@ -119,22 +119,22 @@ public class UsuarioController {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-    /**
-     * Devuelve una lista de los perros del usuario.
-     *
-     * @return Lista de perros
-     */
-    @GET
-    @Path("/getPerros/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response listarPerros(@HeaderParam("token") String token, @PathParam("id") Long id) {
-        if (authService.isLoggedIn(token)) {
-            // Busca el usuario por su id y devuelve la lista de sus perros
-            return Response.ok(usuarioService.listarPerrosDelUsuario(id)).build();
-        }
-        return Response.status(Response.Status.UNAUTHORIZED).build();
-    }
+//    /**
+//     * Devuelve una lista de los perros del usuario.
+//     *
+//     * @return Lista de perros
+//     */
+//    @GET
+//    @Path("/getPerros/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response listarPerros(@HeaderParam("token") String token, @PathParam("id") Long id) {
+//        if (authService.isLoggedIn(token)) {
+//            // Busca el usuario por su id y devuelve la lista de sus perros
+//            return Response.ok(usuarioService.listarPerrosDelUsuario(id)).build();
+//        }
+//        return Response.status(Response.Status.UNAUTHORIZED).build();
+//    }
 
     //    @GET
     //    @Path("/turnos")

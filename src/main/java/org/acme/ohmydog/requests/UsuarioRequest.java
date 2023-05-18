@@ -1,6 +1,6 @@
 package org.acme.ohmydog.requests;
 import java.util.List; 
-import org.acme.ohmydog.entities.Perro;
+//import org.acme.ohmydog.entities.Perro;
 
 public class UsuarioRequest {
     private String email;
@@ -12,7 +12,7 @@ public class UsuarioRequest {
     private String direccion;
     private Long telefono;
     private String rol;
-    private List<Perro> listaPerros;
+//    private List<Perro> listaPerros;
 
     public UsuarioRequest(String email, String password, String nombre, String apellido, Long dni, String localidad,
                           String direccion, Long telefono, String rol) {
@@ -27,9 +27,9 @@ public class UsuarioRequest {
         this.rol = rol;
     }
 
-    public List<Perro> getPerros(){
-        return this.listaPerros;
-    }
+//    public List<Perro> getPerros(){
+//        return this.listaPerros;
+//    }
     
     public String getEmail() {
         return this.email;

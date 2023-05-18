@@ -1,12 +1,12 @@
 package org.acme.ohmydog.entities;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
-@Entity // Indica que "Perro" es una entidad, asociada a la tabla:
-@Table(name = "PERRO") // de la base de datos
+@Entity
+@Table(name = "PERRO")
 
-public class Perro {
-    // Se registra nombre, raza, edad, enfermedad, sexo, edad, características y dni del duenio
+public class Perro extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,16 +18,20 @@ public class Perro {
     private int edad;
     @Column(name = "enfermedad")
     private String enfermedad;
-    @Column(name = "Sexo")
-    private char sexo;
+    @Column(name = "sexo")
+    private String sexo;
     @Column(name = "caracteristicas")
     private String caracteristicas;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Perro(){
     }
 
-    public Perro(String nombre, String raza, int edad, String enfermedad, 
-        char sexo, String caracteristicas) {
+    public Perro(String nombre, String raza, int edad, String enfermedad,
+        String sexo, String caracteristicas) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -36,60 +40,60 @@ public class Perro {
         this.caracteristicas = caracteristicas;
     }
 
-    // Getter y Setter para 'id'
     public Long getId() {
-        return id;
+        return this.id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    // Getter y Setter para 'nombre'
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    // Getter y Setter para 'raza'
     public String getRaza() {
-        return raza;
+        return this.raza;
     }
+
     public void setRaza(String raza) {
         this.raza = raza;
     }
 
-    // Getter y Setter para 'edad'
     public int getEdad() {
-        return edad;
+        return this.edad;
     }
+
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
-    // Getter y Setter para 'enfermedad'
     public String getEnfermedad() {
-        return enfermedad;
+        return this.enfermedad;
     }
+
     public void setEnfermedad(String enfermedad) {
         this.enfermedad = enfermedad;
     }
 
-    // Getter y Setter para 'sexo'
-    public char getSexo() {
-        return sexo;
+    public String getSexo() {
+        return this.sexo;
     }
-    public void setSexo(char sexo) {
+
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
-    // Getter y Setter para 'caracteristicas'
     public String getCaracteristicas() {
         return caracteristicas;
     }
+
     public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
-    
+
 }
