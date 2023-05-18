@@ -3,7 +3,7 @@ package org.acme.ohmydog.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.ohmydog.entities.Usuario;
-
+import org.acme.ohmydog.entities.Perro;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -62,4 +62,9 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
                 .collect(Collectors.toList());
     }
 
+    public List<Perro> listarPerrosDelUsuario(Long id){
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
+        return usuario.getListaPerros();
+    }
 }
