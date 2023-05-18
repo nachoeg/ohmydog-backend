@@ -8,19 +8,25 @@ import org.acme.ohmydog.requests.UsuarioRequest;
 import org.acme.ohmydog.services.AuthService;
 import org.acme.ohmydog.services.UsuarioService;
 
+
 @Path("/usuarios")
 public class UsuarioController {
 
-    @Inject // Se utiliza para decirle a Quarkus que proporcione automaticamente el objeto en la app en tiempo de ejecucion
+    @Inject // Se utiliza para decirle a Quarkus que proporcione automaticamente el objeto
+            // en la app en tiempo de ejecucion
     UsuarioService usuarioService;
 
     @Inject
     AuthService authService;
 
     /**
-     * Se encarga de recibir una solicitud HTTP POST con los datos de un nuevo usuario a ser registrado en la base de datos. El metodo recibe un objeto
-     * UsuarioRequest que contiene los datos del nuevo usuario. Luego, el método llama al servicio de usuario para registrar el usuario correspondiente en la base
+     * Se encarga de recibir una solicitud HTTP POST con los datos de un nuevo
+     * usuario a ser registrado en la base de datos. El metodo recibe un objeto
+     * UsuarioRequest que contiene los datos del nuevo usuario. Luego, el método
+     * llama al servicio de usuario para registrar el usuario correspondiente en la
+     * base
      * de datos y devuelve una respuesta HTTP segun si la operacion fue exitosa o no
+     * 
      * @param usuarioRequest
      * @return Response
      */
@@ -40,9 +46,16 @@ public class UsuarioController {
     }
 
     /**
-     * Se encarga de recibir una solicitud HTTP PUT con los datos de un usuario a ser actualizado en la base de datos. El metodo recibe un parámetro de ruta que
-     * representa el ID del usuario a actualizar y un objeto UsuarioRequest que contiene los nuevos datos del usuario y llama al servicio de usuario para modificar
-     * el usuario correspondiente en la base de datos. Devuelve una respuesta HTTP segun si la operacion fue exitosa o no
+     * Se encarga de recibir una solicitud HTTP PUT con los datos de un usuario a
+     * ser actualizado en la base de datos. El metodo recibe un parámetro de ruta
+     * que
+     * representa el ID del usuario a actualizar y un objeto UsuarioRequest que
+     * contiene los nuevos datos del usuario y llama al servicio de usuario para
+     * modificar
+     * el usuario correspondiente en la base de datos. Devuelve una respuesta HTTP
+     * segun si la operacion fue exitosa o no
+     * 
+     * @param id
      * @param usuarioRequest
      * @return Response
      */
@@ -51,27 +64,26 @@ public class UsuarioController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response modificarUsuario(@HeaderParam("token") String token, @PathParam("id") Long id,
-                                     UsuarioRequest usuarioRequest) { // @PathParam para obtener el valor del parametro "id" de la URL
-        try {
-            if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
-                if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(),
-                        usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
-                        usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(),
-                        usuarioRequest.getRol())) {
-                    return Response.ok().build();
-                } else {
-                    return Response.status(Response.Status.BAD_REQUEST).build();
-                }
+            UsuarioRequest usuarioRequest) { // @PathParam para obtener el valor del parametro "id" de la URL
+        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
+            if (usuarioService.modificarUsuario(id, usuarioRequest.getEmail(), usuarioRequest.getPassword(),
+                    usuarioRequest.getNombre(), usuarioRequest.getApellido(), usuarioRequest.getDni(),
+                    usuarioRequest.getLocalidad(), usuarioRequest.getDireccion(), usuarioRequest.getTelefono(),
+                    usuarioRequest.getRol())) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
             }
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.FORBIDDEN).build();
         }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
     /**
-     * Se encarga de recibir una solicitud HTTP DELETE con el ID de un usuario que se desea eliminar de la base de datos. El metodo llama al servicio de
-     * usuario para eliminar el usuario correspondiente en la base de datos y devuelve una respuesta HTTP segun si la operacion fue exitosa o no
+     * Se encarga de recibir una solicitud HTTP DELETE con el ID de un usuario que
+     * se desea eliminar de la base de datos. El metodo llama al servicio de
+     * usuario para eliminar el usuario correspondiente en la base de datos y
+     * devuelve una respuesta HTTP segun si la operacion fue exitosa o no
+     * 
      * @param token
      * @param id
      * @return Response
@@ -106,14 +118,20 @@ public class UsuarioController {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-//    @GET
-//    @Path("/turnos")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response listarTurnos(@HeaderParam("token") String token) {
-//        if (authService.isLoggedIn(token) && (authService.esCliente())) {
-//            return Response.ok(usuarioService.listarTurnos(authService.getUsuario())).build();
-//        }
-//        return Response.status(Response.Status.UNAUTHORIZED).build();
-//    }
+    /**
+     * Devuelve una lista de los perros del usuario.
+     *
+     * @return Lista de perros
+     */
+    @GET
+    @Path("/getPerros/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response listarPerros(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token)) {
+            // Busca el usuario por su id y devuelve la lista de sus perros
+            return Response.ok(usuarioService.listarPerrosDelUsuario(id)).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }

@@ -8,6 +8,7 @@ import org.acme.ohmydog.entities.Usuario;
 import javax.naming.AuthenticationException;
 import java.util.UUID;
 
+
 @SessionScoped
 public class AuthService {
 
@@ -56,7 +57,5 @@ public class AuthService {
     public boolean esVeterinario() { return this.sesion.esVeterinario(); }
 
     public boolean esCliente() { return this.sesion.esCliente(); }
-
-    public Usuario getUsuario() { return this.sesion.getUsuario(); }
 
 }
