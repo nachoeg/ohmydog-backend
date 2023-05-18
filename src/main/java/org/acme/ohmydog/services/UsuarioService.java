@@ -93,15 +93,6 @@ public class UsuarioService {
         return usuarioRepository.listarUsuarios();
     }
 
-//    /**
-//     * Devuelve los perros del usuario en una lista
-//     * @return Lista de perros
-//     */
-//    @Transactional
-//    public List<Perro> listarPerrosDelUsuario(Long id) {
-//        return usuarioRepository.listarPerrosDelUsuario(id);
-//    }
-
     //    @Transactional
     //    public List<Turno> listarTurnos(Usuario usuario) {
     //        return usuario.getTurnos();

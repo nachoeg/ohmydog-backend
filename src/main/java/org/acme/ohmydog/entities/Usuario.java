@@ -2,11 +2,9 @@ package org.acme.ohmydog.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 
 @Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
 @Table(name = "USUARIO")

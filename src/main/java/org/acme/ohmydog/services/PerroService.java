@@ -32,55 +32,46 @@ public class PerroService {
     }
 
     @Transactional
+    public boolean modificarPerro(Long id, String nombre, String raza, int edad, String enfermedad, String sexo,
+                                  String caracteristicas) {
+        Perro perro = perroRepository.buscarPerroPorId(id);
+        if (perro == null) {
+            return false;
+        }
+        perro.setNombre(nombre);
+        perro.setRaza(raza);
+        perro.setEdad(edad);
+        perro.setEnfermedad(enfermedad);
+        perro.setSexo(sexo);
+        perro.setCaracteristicas(caracteristicas);
+        perroRepository.persist(perro);
+        return true;
+    }
+
+    @Transactional
+    public boolean eliminarPerro(Long id) {
+        Perro perro = perroRepository.buscarPerroPorId(id);
+        if (perro == null) {
+            return false;
+        }
+        perroRepository.eliminate(perro);
+        return true;
+    }
+
+    @Transactional
     public List<Perro> listarPerros() {
         return perroRepository.listarPerros();
     }
 
+    @Transactional
+    public List<Perro> listarPerrosCliente(Long id) {
+        Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
+        if (usuario == null) {
+            return null;
+        }
+        return usuario.getPerros();
+    }
+
 }
-//
-//    /**
-//     * Recibe los parámetros para modificar un perro ya existente en la base de datos.
-//     * @param nombre
-//     * @param raza
-//     * @param edad
-//     * @param enfermedad
-//     * @param sexo
-//     * @param caracteristicas
-//     * @return boolean
-//     */
-//
-//    @Transactional
-//    public boolean modificarPerro(Long id, String nombre, String raza, int edad, String enfermedad,
-//    char sexo, String caracteristicas) {
-//        Perro perro = perroRepository.buscarPerroPorID(id);
-//        if (perro == null) {
-//            return false; // No se encontró el perro especificado
-//        }
-//        perro.setNombre(nombre);
-//        perro.setRaza(raza);
-//        perro.setEdad(edad);
-//        perro.setEnfermedad(enfermedad);
-//        perro.setSexo(sexo);
-//        perro.setCaracteristicas(caracteristicas);
-//        perroRepository.persist(perro); // Actualizar el perro en la base de datos
-//        return true;
-//    }
-//
-//    /**
-//     * Busca en la base de datos el perro correspondiente. Si se encuentra, se llama al metodo "eliminate" del
-//     * "perroRepository" para eliminarlo de la base de datos.
-//     * @param id
-//     * @return boolean
-//     */
-//    @Transactional
-//    public boolean eliminarPerro(Long id, Usuario usuario) {
-//        Perro perro = perroRepository.buscarPerroPorID(id);
-//        if (perro == null) {
-//            return false; // No se encontró el perro
-//        }
-//        perroRepository.eliminate(perro); // Eliminar el perro de la base de datos
-//        return true;
-//    }
-//
-//}
+
 

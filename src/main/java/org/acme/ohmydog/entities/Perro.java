@@ -44,56 +44,55 @@ public class Perro extends PanacheEntityBase {
         return this.id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNombre() {
         return this.nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getRaza() {
         return this.raza;
     }
 
-    public void setRaza(String raza) {
-        this.raza = raza;
-    }
-
     public int getEdad() {
         return this.edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public String getEnfermedad() {
         return this.enfermedad;
     }
 
-    public void setEnfermedad(String enfermedad) {
-        this.enfermedad = enfermedad;
-    }
-
     public String getSexo() {
         return this.sexo;
+    }
+
+    public String getCaracteristicas() {
+        return this.caracteristicas;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setEnfermedad(String enfermedad) {
+        this.enfermedad = enfermedad;
     }
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
-    public String getCaracteristicas() {
-        return caracteristicas;
-    }
-
     public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
-
 }

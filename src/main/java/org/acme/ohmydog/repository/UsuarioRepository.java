@@ -3,10 +3,8 @@ package org.acme.ohmydog.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.ohmydog.entities.Usuario;
-//import org.acme.ohmydog.entities.Perro;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 
 @ApplicationScoped
 // PanacheRepository es una interfaz que brinda metodos de consultas para buscar y recuperar datos de la base de datos
@@ -60,9 +58,4 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return Usuario.find("rol = 'cliente'").list();
     }
 
-//    public List<Perro> listarPerrosDelUsuario(Long id){
-//        UsuarioRepository usuarioRepository = new UsuarioRepository();
-//        Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
-//        return usuario.getListaPerros();
-//    }
 }

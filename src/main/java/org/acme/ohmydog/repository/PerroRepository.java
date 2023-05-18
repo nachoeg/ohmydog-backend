@@ -1,12 +1,11 @@
 package org.acme.ohmydog.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.ohmydog.entities.Perro;
-import org.acme.ohmydog.entities.Usuario;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 
 @ApplicationScoped
 public class PerroRepository implements PanacheRepository<Perro> {
@@ -17,7 +16,7 @@ public class PerroRepository implements PanacheRepository<Perro> {
      * @param id
      * @return Perro
      */
-    public Perro buscarPerroPorID(Long id) {
+    public Perro buscarPerroPorId(Long id) {
         return find("id", id).firstResult();
     }
 
@@ -31,14 +30,9 @@ public class PerroRepository implements PanacheRepository<Perro> {
         return listAll();
     }
 
+    public void eliminate(Perro perro) {
+        delete(perro);
+    }
+
 }
-//
-//    /**
-//     * Se encarga de eliminar un objeto Perro especifico de la base de datos utilizando el método delete() del repositorio de perro
-//     * @param perro
-//     */
-//    public void eliminate(Perro perro) {
-//        delete(perro); // Elimina el perro de la BD
-//    }
-//}
 
