@@ -1,8 +1,6 @@
 package org.acme.ohmydog.entities;
-
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -22,7 +20,6 @@ public class Turno extends PanacheEntityBase {
 
     public Turno() {
     }
-
     public Turno(LocalDate fecha, String motivo) {
         //this.perro = perro;
         this.fecha = fecha;
@@ -30,14 +27,12 @@ public class Turno extends PanacheEntityBase {
         this.estado = "pendiente";
     }
 
-//    public String getPerro() {
-//        return this.perro;
-//    }
-
+    //    public String getPerro() {
+    //        return this.perro;
+    //    }
     public LocalDate getFecha() {
         return this.fecha;
     }
-
     public String getMotivo() {
         return this.motivo;
     }
@@ -47,13 +42,12 @@ public class Turno extends PanacheEntityBase {
     }
 
     //    public void setPerro(String perro) {
-//        this.perro = perro;
-//    }
+    //        this.perro = perro;
+    //    }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
-
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }

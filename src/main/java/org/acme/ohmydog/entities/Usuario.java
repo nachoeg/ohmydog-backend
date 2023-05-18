@@ -2,9 +2,9 @@ package org.acme.ohmydog.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
-
 import java.util.List;
 import java.util.Objects;
+
 
 @Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
 @Table(name = "USUARIO")
@@ -30,7 +30,11 @@ public class Usuario extends PanacheEntityBase {
     private Long telefono;
     @Column(name = "rol")
     private String rol;
-//    private List<Perro> perros;
+
+    // Define una relacion "uno a muchos" con el usuario y sus perros
+    // No hace falta iniciarlizarla porque quarkus se encarga de ello.
+    @OneToMany(cascade = CascadeType.ALL) 
+    private List<Perro> listaPerros;
 
     public Usuario() {
     }
@@ -51,6 +55,25 @@ public class Usuario extends PanacheEntityBase {
     public boolean esVeterinario() { return Objects.equals(this.rol, "veterinario"); }
 
     public boolean esCliente() { return Objects.equals(this.rol, "cliente"); }
+
+    public List<Perro> getListaPerros(){
+        return this.listaPerros;
+    }
+
+    // Funcionalidades extra para administrar los perros
+    public Perro getPerroPorNombre(String nombre){
+        for (Perro perro : this.listaPerros) {
+            if (perro.getNombre().equals(nombre)) 
+                // El nombre coincide, existe un perro con ese nombre
+                return perro;
+        }
+        return null;
+    }
+
+    public boolean eliminarPerro(Perro perro){
+        return this.listaPerros.remove(perro);
+    }
+    // Fin de funcionalidades extra para administrar los perros
 
     public Long getId() {
         return this.id;
@@ -92,12 +115,6 @@ public class Usuario extends PanacheEntityBase {
         return this.rol;
     }
 
-//    public List<Turno> getTurnos() {
-//        return this.perros.stream()
-//                .map(perro -> perro.getTurnos)
-//                .collectToList();
-//    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -133,4 +150,14 @@ public class Usuario extends PanacheEntityBase {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public void agregarPerro(Perro perro){
+        this.listaPerros.add(listaPerros.size(), perro); // Lo agrega al final de la lista
+    }
+
+    //    public List<Turno> getTurnos() {
+    //        return this.perros.stream()
+    //                .map(perro -> perro.getTurnos)
+    //                .collectToList();
+    //    }
 }
