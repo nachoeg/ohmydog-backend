@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "TURNO")
+@Table(name = "turnos")
 public class Turno extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,6 @@ public class Turno extends PanacheEntityBase {
     private LocalDate fecha;
     @Column(name = "motivo")
     private String motivo;
-    @Column(name = "estado")
-    private String estado;
 
 
     public Turno() {
@@ -27,7 +25,6 @@ public class Turno extends PanacheEntityBase {
         //this.perro = perro;
         this.fecha = fecha;
         this.motivo = motivo;
-        this.estado = "pendiente";
     }
 
 //    public String getPerro() {
@@ -42,11 +39,7 @@ public class Turno extends PanacheEntityBase {
         return this.motivo;
     }
 
-    public String getEstado() {
-        return this.estado;
-    }
-
-    //    public void setPerro(String perro) {
+//    public void setPerro(String perro) {
 //        this.perro = perro;
 //    }
 
@@ -56,9 +49,5 @@ public class Turno extends PanacheEntityBase {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 }
