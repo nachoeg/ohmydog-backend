@@ -22,7 +22,7 @@ public class TurnoController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("token") String token, TurnoRequest turnoRequest) {
-        if ((authService.isLoggedIn(token) && (authService.esCliente()))) {
+        if (authService.isLoggedIn(token)) {
             if (turnoService.register(turnoRequest)) {
                 return Response.ok().build();
             } else {
@@ -39,7 +39,7 @@ public class TurnoController {
     public Response modificarTurno(@HeaderParam("token") String token, @PathParam("id") Long id,
                                      TurnoRequest turnoRequest) {
         if (authService.isLoggedIn(token)) {
-            if (turnoService.modificarTurno(id, turnoRequest.getFecha(), turnoRequest.getMotivo(),
+            if (turnoService.modificarTurno(id, turnoRequest.getIdPerro(), turnoRequest.getFecha(), turnoRequest.getMotivo(),
                     turnoRequest.getEstado())) {
                 return Response.ok().build();
             } else {
@@ -53,7 +53,7 @@ public class TurnoController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response listarTurnos(@HeaderParam("token") String token) {
-        if ((authService.isLoggedIn(token) && (authService.esVeterinario()))) {
+        if (authService.isLoggedIn(token)) {
             return Response.ok(turnoService.listarTurnos()).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();

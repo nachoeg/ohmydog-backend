@@ -3,8 +3,9 @@ package org.acme.ohmydog.services;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
-import org.acme.ohmydog.entities.Usuario;
+import org.acme.ohmydog.repository.PerroRepository;
 import org.acme.ohmydog.repository.TurnoRepository;
 import org.acme.ohmydog.requests.TurnoRequest;
 
@@ -17,21 +18,23 @@ public class TurnoService {
     @Inject
     TurnoRepository turnoRepository;
 
-//    @Inject
-//    PerroRepository perroRepository;
+    @Inject
+    PerroRepository perroRepository;
 
     @Transactional
     public boolean register(TurnoRequest turnoRequest) {
-//        if (perroRepository.buscarPerroPorId(turnoRequest.getIdPerro()) == null) {
-//            return false;
-//        }
-        turnoRepository.register(turnoRequest.getIdPerro(), turnoRequest.getFecha(), turnoRequest.getMotivo());
+        Perro perro = perroRepository.buscarPerroPorId(turnoRequest.getIdPerro());
+        if (perro == null) {
+            return false;
+        }
+        Turno turno = turnoRepository.register(perro.getId(), turnoRequest.getFecha(), turnoRequest.getMotivo());
+        perro.agregarTurno(turno);
         return true;
     }
 
     @Transactional
-    public boolean modificarTurno(Long idPerro, LocalDate fecha, String motivo, String estado) {
-        Turno turno = turnoRepository.buscarTurnoPorIdPerro(idPerro);
+    public boolean modificarTurno(Long id, Long idPerro, LocalDate fecha, String motivo, String estado) {
+        Turno turno = turnoRepository.buscarTurnoPorId(id);
         if (turno == null) {
             return false;
         }
@@ -39,7 +42,7 @@ public class TurnoService {
         turno.setFecha(fecha);
         turno.setMotivo(motivo);
         turno.setEstado(estado);
-        turnoRepository.persist(turno); // Actualizar el usuario en la base de datos
+        turnoRepository.persist(turno);
         return true;
     }
 
@@ -50,7 +53,11 @@ public class TurnoService {
 
     @Transactional
     public List<Turno> listarTurnosPerro(Long idPerro) {
-        return turnoRepository.listarTurnosPerro(idPerro);
+        Perro perro = perroRepository.buscarPerroPorId(idPerro);
+        if (perro == null) {
+            return null;
+        }
+        return perro.getTurnos();
     }
 
 }

@@ -6,7 +6,11 @@ import jakarta.enterprise.event.Observes;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.acme.ohmydog.entities.Perro;
+import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.entities.Usuario;
+
+import java.time.LocalDate;
 
 @ApplicationScoped
 public class MiApp {
@@ -21,10 +25,21 @@ public class MiApp {
         Usuario usuario2 = new Usuario("usuario2@mail.com", "2", "usuario2", "2", 2L, "Localidad2", "Direccion2", 123456789L, "cliente");
         Usuario usuario3 = new Usuario("usuario3@mail.com", "3", "usuario3", "3", 3L, "Localidad3", "Direccion3", 123456789L, "cliente");
 
+
+
+
         // Persistir el usuario en la base de datos
         entityManager.persist(admin);
         entityManager.persist(usuario1);
         entityManager.persist(usuario2);
         entityManager.persist(usuario3);
+
+        Perro perro = new Perro("Perro", "Raza", 1, "Ninguna", "masculino", "Blanco");
+        entityManager.persist(perro);
+        usuario1.agregarPerro(perro);
+
+        Turno turno = new Turno(perro.getId(), LocalDate.now(), "Consulta General");
+        entityManager.persist(turno);
+        perro.agregarTurno(turno);
     }
 }

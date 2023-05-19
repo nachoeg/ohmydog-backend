@@ -3,6 +3,9 @@ package org.acme.ohmydog.entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "PERRO")
 
@@ -27,6 +30,10 @@ public class Perro extends PanacheEntityBase {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "perro_id")
+    private List<Turno> turnos;
+
     public Perro(){
     }
 
@@ -38,10 +45,15 @@ public class Perro extends PanacheEntityBase {
         this.enfermedad = enfermedad;
         this.sexo = sexo;
         this.caracteristicas = caracteristicas;
+        this.turnos = new ArrayList<>();
     }
 
     public Long getId() {
         return this.id;
+    }
+
+    public void agregarTurno(Turno turno) {
+        this.turnos.add(turno);
     }
 
     public String getNombre() {
@@ -66,6 +78,10 @@ public class Perro extends PanacheEntityBase {
 
     public String getCaracteristicas() {
         return this.caracteristicas;
+    }
+
+    public List<Turno> getTurnos() {
+        return turnos;
     }
 
     public void setId(Long id) {

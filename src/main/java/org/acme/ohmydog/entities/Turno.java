@@ -1,4 +1,5 @@
 package org.acme.ohmydog.entities;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -9,6 +10,10 @@ public class Turno extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne()
+    @JoinColumn(name = "perro_id")
+    private Perro perro;
 
     @Column(name = "idPerro")
     private Long idPerro;
@@ -30,8 +35,12 @@ public class Turno extends PanacheEntityBase {
         this.estado = "pendiente";
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Long getIdPerro() {
-        return this.idPerro;
+        return idPerro;
     }
 
     public LocalDate getFecha() {
@@ -45,10 +54,6 @@ public class Turno extends PanacheEntityBase {
         return this.estado;
     }
 
-    public void setIdPerro(Long idPerro) {
-        this.idPerro = idPerro;
-    }
-
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
@@ -58,5 +63,9 @@ public class Turno extends PanacheEntityBase {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public void setIdPerro(Long idPerro) {
+        this.idPerro = idPerro;
     }
 }
