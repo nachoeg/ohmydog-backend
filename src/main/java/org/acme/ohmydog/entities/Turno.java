@@ -32,15 +32,15 @@ public class Turno extends PanacheEntityBase {
         this.idPerro = idPerro;
         this.fecha = fecha;
         this.motivo = motivo;
-        this.estado = "pendiente";
+        this.estado = "Pendiente";
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public Long getIdPerro() {
-        return idPerro;
+        return this.idPerro;
     }
 
     public LocalDate getFecha() {

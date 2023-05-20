@@ -57,7 +57,7 @@ public class TurnoService {
         if (perro == null) {
             return null;
         }
-        return perro.getTurnos();
+        return turnoRepository.listarTurnosPerro(perro);
     }
 
 }

@@ -2,11 +2,12 @@ package org.acme.ohmydog.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
+import org.acme.ohmydog.entities.Usuario;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class TurnoRepository implements PanacheRepository<Turno> {
@@ -23,6 +24,10 @@ public class TurnoRepository implements PanacheRepository<Turno> {
 
     public List<Turno> listarTurnos() {
         return listAll();
+    }
+
+    public List<Turno> listarTurnosPerro(Perro perro) {
+        return list("perro", perro);
     }
 
 }

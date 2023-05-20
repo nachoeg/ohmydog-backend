@@ -69,7 +69,7 @@ public class PerroService {
         if (usuario == null) {
             return null;
         }
-        return usuario.getPerros();
+        return perroRepository.listarPerrosCliente(usuario);
     }
 
 }

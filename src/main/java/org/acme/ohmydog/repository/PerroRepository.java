@@ -2,6 +2,7 @@ package org.acme.ohmydog.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.ohmydog.entities.Perro;
+import org.acme.ohmydog.entities.Usuario;
 
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class PerroRepository implements PanacheRepository<Perro> {
 
     public List<Perro> listarPerros() {
         return listAll();
+    }
+
+    public List<Perro> listarPerrosCliente(Usuario usuario) {
+        return list("usuario", usuario);
     }
 
     public void eliminate(Perro perro) {
