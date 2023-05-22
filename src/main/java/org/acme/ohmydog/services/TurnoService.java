@@ -11,6 +11,7 @@ import org.acme.ohmydog.requests.TurnoRequest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class TurnoService {
@@ -26,6 +27,15 @@ public class TurnoService {
         Perro perro = perroRepository.buscarPerroPorId(turnoRequest.getIdPerro());
         if (perro == null) {
             return false;
+        }
+        if (Objects.equals(turnoRequest.getMotivo(), "Vacuna Antirrabica")) {
+            if (!perro.puedeVacunaAntirrabica(turnoRequest.getFecha())) {
+                return false;
+            }
+        } else if (Objects.equals(turnoRequest.getMotivo(), "Vacuna Antienfermedades")) {
+            if (!perro.puedeVacunaAntienfermedades(turnoRequest.getFecha())) {
+                return false;
+            }
         }
         Turno turno = turnoRepository.register(perro.getId(), turnoRequest.getFecha(), turnoRequest.getMotivo());
         perro.agregarTurno(turno);

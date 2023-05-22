@@ -3,6 +3,8 @@ package org.acme.ohmydog.entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,12 @@ public class Perro extends PanacheEntityBase {
     @Column(name = "caracteristicas")
     private String caracteristicas;
 
+    @Column(name = "vacunaAntirrabica")
+    private LocalDate vacunaAntirrabica;
+
+    @Column(name = "vacunaAntienfermedades")
+    private LocalDate vacunaAntienfermedades;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -46,6 +54,8 @@ public class Perro extends PanacheEntityBase {
         this.sexo = sexo;
         this.caracteristicas = caracteristicas;
         this.turnos = new ArrayList<>();
+        this.vacunaAntirrabica = null;
+        this.vacunaAntienfermedades = null;
     }
 
     public Long getId() {
@@ -54,6 +64,15 @@ public class Perro extends PanacheEntityBase {
 
     public void agregarTurno(Turno turno) {
         this.turnos.add(turno);
+    }
+
+    public boolean puedeVacunaAntirrabica(LocalDate fecha) {
+        return this.getEdad() > 4;
+
+    }
+
+    public boolean puedeVacunaAntienfermedades(LocalDate fecha) {
+        return this.getEdad() > 2;
     }
 
     public String getNombre() {
@@ -84,6 +103,14 @@ public class Perro extends PanacheEntityBase {
         return turnos;
     }
 
+    public LocalDate getVacunaAntirrabica() {
+        return this.vacunaAntirrabica;
+    }
+
+    public LocalDate getVacunaAntienfermedades() {
+        return this.vacunaAntienfermedades;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -110,5 +137,13 @@ public class Perro extends PanacheEntityBase {
 
     public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
+    }
+
+    public void setVacunaAntirrabica(LocalDate vacunaAntirrabica) {
+        this.vacunaAntirrabica = vacunaAntirrabica;
+    }
+
+    public void setVacunaAntienfermedades(LocalDate vacunaAntienfermedades) {
+        this.vacunaAntienfermedades = vacunaAntienfermedades;
     }
 }
