@@ -22,7 +22,7 @@ public class PerroController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("token") String token, PerroRequest perroRequest) {
-        if ((authService.isLoggedIn(token) && (authService.esCliente()))) {
+        if ((authService.isLoggedIn(token) && (authService.esVeterinario()))) {
             if (perroService.register(perroRequest)) {
                 return Response.ok().build();
             } else {
