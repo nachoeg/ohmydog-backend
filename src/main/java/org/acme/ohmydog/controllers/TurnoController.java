@@ -22,8 +22,8 @@ public class TurnoController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("token") String token, TurnoRequest turnoRequest) {
-        if (authService.isLoggedIn(token)) {
-            if (turnoService.register(turnoRequest)) {
+        if (authService.isLoggedIn(token) && (authService.esCliente())) {
+            if (turnoService.register(turnoRequest) ) {
                 return Response.ok().build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
@@ -53,7 +53,7 @@ public class TurnoController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response listarTurnos(@HeaderParam("token") String token) {
-        if (authService.isLoggedIn(token)) {
+        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
             return Response.ok(turnoService.listarTurnos()).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
