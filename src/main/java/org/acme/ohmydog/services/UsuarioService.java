@@ -93,8 +93,18 @@ public class UsuarioService {
         return usuarioRepository.listarUsuarios();
     }
 
-    //    @Transactional
-    //    public List<Turno> listarTurnos(Usuario usuario) {
-    //        return usuario.getTurnos();
-    //    }
+    @Transactional
+    public boolean cambiarContrasena(Long id, String contrasenaVieja, String contrasenaNueva, String contrasenaConfirmacion) {
+        Usuario usuario = usuarioRepository.buscarUsuarioPorId(id);
+        if (usuario == null) {
+            return false; // No se encontró el usuario con el id especificado
+        }
+        if (!usuario.coincidePassword(contrasenaVieja)) {
+            return false;
+        }
+        usuario.setPassword(contrasenaNueva);
+        usuarioRepository.persist(usuario); // Actualizar el usuario en la base de datos
+        return true;
+    }
+
 }

@@ -21,9 +21,20 @@ public class MiApp {
     void agregarUsuarios(@Observes StartupEvent event) {
         // Código para agregar usuarios a tu base de datos
         Usuario admin = new Usuario("admin@mail.com", "0", "admin", "admin", 0L, "Localidad0", "Direccion0", 123456789L, "veterinario");
+        Usuario usuario1 = new Usuario("usuario1@mail.com", "1", "usuario1", "1", 1L, "Localidad1", "Direccion1", 123456789L, "cliente");
+        Usuario usuario2 = new Usuario("usuario2@mail.com", "2", "usuario2", "2", 2L, "Localidad2", "Direccion2", 223456789L, "cliente");
+        Usuario usuario3 = new Usuario("usuario3@mail.com", "3", "usuario3", "3", 3L, "Localidad3", "Direccion3", 323456789L, "cliente");
 
         // Persistir el usuario en la base de datos
         entityManager.persist(admin);
+        entityManager.persist(usuario1);
+        entityManager.persist(usuario2);
+        entityManager.persist(usuario3);
+
+        Perro perro = new Perro("Perro", "Raza", 1, "Ninguna", "Masculino", "Caracteristicas");
+        entityManager.persist(perro);
+        usuario1.agregarPerro(perro);
+
 
     }
 }

@@ -63,16 +63,9 @@ public class Usuario extends PanacheEntityBase {
         return this.perros.remove(perro);
     }
 
-//
-//    // Funcionalidades extra para administrar los perros
-//    public Perro getPerroPorNombre(String nombre){
-//        for (Perro perro : this.listaPerros) {
-//            if (perro.getNombre().equals(nombre))
-//                // El nombre coincide, existe un perro con ese nombre
-//                return perro;
-//        }
-//        return null;
-//    }
+    public boolean coincidePassword(String contrasena) {
+        return this.getPassword().equals(contrasena);
+    }
 
     public Long getId() {
         return this.id;
