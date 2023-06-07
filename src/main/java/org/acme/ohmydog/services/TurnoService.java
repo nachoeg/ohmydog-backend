@@ -42,6 +42,11 @@ public class TurnoService {
             if (!perro.puedeVacunaAntienfermedades(turnoRequest.getFecha())) {
                 return false;
             }
+            else if (Objects.equals(turnoRequest.getMotivo(), "Castracion")) {
+                if (!perro.puedeCastracion()) {
+                    return false;
+                }
+            }
         }
         Turno turno = turnoRepository.register(perro.getId(), turnoRequest.getFecha(), turnoRequest.getMotivo());
         perro.agregarTurno(turno);

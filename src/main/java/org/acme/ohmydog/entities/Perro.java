@@ -107,6 +107,10 @@ public class Perro extends PanacheEntityBase {
         return false;
     }
 
+    public boolean puedeCastracion() {
+        return true;
+    }
+
     public String getNombre() {
         return this.nombre;
     }
@@ -178,4 +182,5 @@ public class Perro extends PanacheEntityBase {
     public void setVacunaAntienfermedades(LocalDate vacunaAntienfermedades) {
         this.vacunaAntienfermedades = vacunaAntienfermedades;
     }
+
 }
