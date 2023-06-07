@@ -63,8 +63,8 @@ public class TurnoController {
     @Path("/perro/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response listarTurnosPerro(@HeaderParam("token") String token, @PathParam("id") Long id) {
-        if (authService.isLoggedIn(token)) {
+    public Response listarTurnosPerro(@HeaderParam("token") String token, @HeaderParam("idCliente") Long idCliente, @PathParam("id") Long id) {
+        if ((authService.isLoggedIn(token) && (authService.esVeterinario() || authService.estaAutorizado(idCliente)))) {
             return Response.ok(turnoService.listarTurnosPerro(id)).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
