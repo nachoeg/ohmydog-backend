@@ -77,13 +77,13 @@ public class TurnoService {
     }
 
     @Transactional
-    public List<List<Turno>> listarTurnosUsuario(Long idUsuario) {
+    public List<Turno> listarTurnosUsuario(Long idUsuario) {
         Usuario usuario = usuarioRepository.buscarUsuarioPorId(idUsuario);
         if (usuario == null) {
             return null;
         }
         return usuario.getPerros().stream()
-                .map(Perro::getTurnos)
+                .flatMap(perro -> perro.getTurnos().stream())
                 .collect(Collectors.toList());
     }
 }
