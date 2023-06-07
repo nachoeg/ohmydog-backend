@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.acme.ohmydog.requests.ChangePasswordRequest;
 import org.acme.ohmydog.requests.UsuarioRequest;
 import org.acme.ohmydog.services.AuthService;
 import org.acme.ohmydog.services.UsuarioService;
@@ -128,10 +129,10 @@ public class UsuarioController {
     @Path("/changePassword/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cambiarContrasena(@HeaderParam("token") String token, @PathParam("id") Long id,
-                                      String contrasenaVieja, String contrasenaNueva, String contrasenaConfirmacion ) {
+    public Response cambiarContrasena(@HeaderParam("token") String token, @PathParam("id") Long id, ChangePasswordRequest changePasswordRequest) {
         if (authService.isLoggedIn(token)) {
-            if (usuarioService.cambiarContrasena(id, contrasenaVieja, contrasenaNueva, contrasenaConfirmacion)) {
+            if (usuarioService.cambiarContrasena(id, changePasswordRequest.getContrasenaVieja(),
+                    changePasswordRequest.getContrasenaNueva(), changePasswordRequest.getContrasenaConfirmacion())) {
                 return Response.ok().build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
