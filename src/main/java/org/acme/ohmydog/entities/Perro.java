@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,12 +68,43 @@ public class Perro extends PanacheEntityBase {
     }
 
     public boolean puedeVacunaAntirrabica(LocalDate fecha) {
-        return this.getEdad() > 4;
-
+        if (this.getEdad() > 4) {
+            if (this.vacunaAntirrabica == null) {
+                this.vacunaAntirrabica = fecha;
+                return true;
+            }
+            else {
+                Period periodo = this.vacunaAntirrabica.until(fecha);
+                if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
+                    this.vacunaAntirrabica = fecha;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean puedeVacunaAntienfermedades(LocalDate fecha) {
-        return this.getEdad() > 2;
+        if (this.getEdad() > 2) {
+            if (this.vacunaAntienfermedades == null) {
+                this.vacunaAntienfermedades = fecha;
+                return true;
+            }
+            else if (this.getEdad() <= 4) {
+                    Period periodo = this.vacunaAntienfermedades.until(fecha);
+                    if (periodo.getYears() >= 0 && periodo.getMonths() >= 0 && periodo.getDays() >= 21) {
+                        this.vacunaAntienfermedades = fecha;
+                        return true;
+                    }
+            } else {
+                Period periodo = this.vacunaAntienfermedades.until(fecha);
+                if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
+                    this.vacunaAntienfermedades = fecha;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String getNombre() {

@@ -31,7 +31,7 @@ public class MiApp {
         entityManager.persist(usuario2);
         entityManager.persist(usuario3);
 
-        Perro perro = new Perro("Perro", "Raza", 1, "Ninguna", "Masculino", "Caracteristicas");
+        Perro perro = new Perro("Perro", "Raza", 6, "Ninguna", "Masculino", "Caracteristicas");
         entityManager.persist(perro);
         usuario1.agregarPerro(perro);
 
