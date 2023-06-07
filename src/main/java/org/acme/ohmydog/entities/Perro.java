@@ -39,7 +39,7 @@ public class Perro extends PanacheEntityBase {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "perro_id")
     private List<Turno> turnos;
 

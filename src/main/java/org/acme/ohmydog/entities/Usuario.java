@@ -30,7 +30,7 @@ public class Usuario extends PanacheEntityBase {
     private Long telefono;
     @Column(name = "rol")
     private String rol;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "usuario_id")
     private List<Perro> perros;
 
