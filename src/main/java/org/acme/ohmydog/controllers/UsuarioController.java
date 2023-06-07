@@ -44,8 +44,7 @@ public class UsuarioController {
                 }
             }
             return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
@@ -88,8 +87,10 @@ public class UsuarioController {
     }
 
     /**
-     * Se encarga de recibir una solicitud HTTP DELETE con el ID de un usuario que se desea eliminar de la base de datos. El metodo llama al servicio de
-     * usuario para eliminar el usuario correspondiente en la base de datos y devuelve una respuesta HTTP segun si la operacion fue exitosa o no
+     * Se encarga de recibir una solicitud HTTP DELETE con el ID de un usuario que
+     * se desea eliminar de la base de datos. El metodo llama al servicio de
+     * usuario para eliminar el usuario correspondiente en la base de datos y
+     * devuelve una respuesta HTTP segun si la operacion fue exitosa o no
      * 
      * @param token
      * @param id
@@ -129,7 +130,8 @@ public class UsuarioController {
     @Path("/changePassword/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cambiarContrasena(@HeaderParam("token") String token, @PathParam("id") Long id, ChangePasswordRequest changePasswordRequest) {
+    public Response cambiarContrasena(@HeaderParam("token") String token, @PathParam("id") Long id,
+            ChangePasswordRequest changePasswordRequest) {
         if (authService.isLoggedIn(token)) {
             if (usuarioService.cambiarContrasena(id, changePasswordRequest.getContrasenaVieja(),
                     changePasswordRequest.getContrasenaNueva(), changePasswordRequest.getContrasenaConfirmacion())) {
@@ -141,4 +143,20 @@ public class UsuarioController {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
+    /**
+     * Retorna un usuario mediante el ID que se pasa por URL
+     * 
+     * 
+     * @return Response
+     */
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getUsuarioPorID(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token)) {
+            return Response.ok(usuarioService.buscarUsuarioPorId(id)).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }
