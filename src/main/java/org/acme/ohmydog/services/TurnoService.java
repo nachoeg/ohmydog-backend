@@ -5,13 +5,16 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
+import org.acme.ohmydog.entities.Usuario;
 import org.acme.ohmydog.repository.PerroRepository;
 import org.acme.ohmydog.repository.TurnoRepository;
+import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.TurnoRequest;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class TurnoService {
@@ -21,6 +24,9 @@ public class TurnoService {
 
     @Inject
     PerroRepository perroRepository;
+
+    @Inject
+    UsuarioRepository usuarioRepository;
 
     @Transactional
     public boolean register(TurnoRequest turnoRequest) {
@@ -70,4 +76,14 @@ public class TurnoService {
         return turnoRepository.listarTurnosPerro(perro);
     }
 
+    @Transactional
+    public List<List<Turno>> listarTurnosUsuario(Long idUsuario) {
+        Usuario usuario = usuarioRepository.buscarUsuarioPorId(idUsuario);
+        if (usuario == null) {
+            return null;
+        }
+        return usuario.getPerros().stream()
+                .map(Perro::getTurnos)
+                .collect(Collectors.toList());
+    }
 }

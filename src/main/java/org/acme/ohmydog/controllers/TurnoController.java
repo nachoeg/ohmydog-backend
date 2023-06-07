@@ -60,12 +60,23 @@ public class TurnoController {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/perro/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response listarTurnosPerro(@HeaderParam("token") String token, @PathParam("id") Long id) {
         if (authService.isLoggedIn(token)) {
             return Response.ok(turnoService.listarTurnosPerro(id)).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @GET
+    @Path("/cliente/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response listarTurnosCliente(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if ((authService.isLoggedIn(token)) && (authService.estaAutorizado(id))) {
+            return Response.ok(turnoService.listarTurnosUsuario(id)).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }

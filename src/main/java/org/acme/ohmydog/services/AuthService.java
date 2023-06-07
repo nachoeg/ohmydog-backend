@@ -6,6 +6,7 @@ import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.entities.Sesion;
 import org.acme.ohmydog.entities.Usuario;
 import javax.naming.AuthenticationException;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -59,4 +60,8 @@ public class AuthService {
     public boolean esCliente() { return this.sesion.esCliente(); }
 
     public Usuario getUsuario() { return this.sesion.getUsuario(); }
+
+    public boolean estaAutorizado(Long id) {
+       return Objects.equals(id, this.getUsuario().getId());
+    }
 }
