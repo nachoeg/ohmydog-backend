@@ -20,4 +20,12 @@ public class PerroEnAdopcionRepository implements PanacheRepository<PerroEnAdopc
         return listAll();
     }
 
+    public PerroEnAdopcion buscarPerroPorId(Long id) {
+        return find("id", id).firstResult();
+    }
+
+    public void eliminate(PerroEnAdopcion perroEnAdopcion) {
+        delete(perroEnAdopcion);
+    }
+
 }

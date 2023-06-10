@@ -33,6 +33,16 @@ public class PerroEnAdopcionService {
     }
 
     @Transactional
+    public boolean eliminarPerro(Long id) {
+        PerroEnAdopcion perro = perroEnAdopcionRepository.buscarPerroPorId(id);
+        if (perro == null) {
+            return false;
+        }
+        perroEnAdopcionRepository.eliminate(perro);
+        return true;
+    }
+
+    @Transactional
     public List<PerroEnAdopcion> listarPerrosEnAdopcion() {
         return perroEnAdopcionRepository.listarPerrosEnAdopcion();
     }

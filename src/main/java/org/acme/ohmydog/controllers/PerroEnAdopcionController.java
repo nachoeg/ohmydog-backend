@@ -29,6 +29,21 @@ public class PerroEnAdopcionController {
             }
     }
 
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response eliminarPerro(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token)){
+            if (perroEnAdopcionService.eliminarPerro(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }     
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
