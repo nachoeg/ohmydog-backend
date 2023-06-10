@@ -24,18 +24,25 @@ public class PerroEnAdopcion extends PanacheEntityBase {
     private Long telefono;
     @Column(name = "estado")
     private String estado;
+    @Column(name = "caracteristicas")
+    private String caracteristicas;
+    @Column(name = "enfermedades")
+    private String enfermedades;
+    
 
     public PerroEnAdopcion() {
 
     }
 
-    public PerroEnAdopcion(String nombre, String raza, int edad, String sexo, String email, Long telefono) {
+    public PerroEnAdopcion(String nombre, String raza, int edad, String sexo, String email, Long telefono, String caracteristicas, String enfermedades) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
         this.sexo = sexo;
         this.email = email;
         this.telefono = telefono;
+        this.caracteristicas = caracteristicas;
+        this.enfermedades = enfermedades;
         this.estado = "Pendiente";
     }
 
@@ -69,5 +76,13 @@ public class PerroEnAdopcion extends PanacheEntityBase {
 
     public Long getTelefono() {
         return telefono;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public String getEnfermedades() {
+        return enfermedades;
     }
 }

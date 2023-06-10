@@ -36,10 +36,7 @@ public class PerroEnAdopcionController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response listarPerrosEnAdopcion(@HeaderParam("token") String token) {
-        if (authService.isLoggedIn(token)) {
             return Response.ok(perroEnAdopcionService.listarPerrosEnAdopcion()).build();
-        }
-        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 }
 

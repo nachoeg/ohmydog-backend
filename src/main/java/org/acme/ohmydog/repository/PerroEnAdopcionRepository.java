@@ -10,8 +10,8 @@ import java.util.List;
 @ApplicationScoped
 public class PerroEnAdopcionRepository implements PanacheRepository<PerroEnAdopcion> {
 
-    public PerroEnAdopcion register(String nombre, String raza, int edad, String sexo, String email, Long telefono) {
-        PerroEnAdopcion perroEnAdopcion = new PerroEnAdopcion(nombre, raza, edad, sexo, email, telefono);
+    public PerroEnAdopcion register(String nombre, String raza, int edad, String sexo, String email, Long telefono, String caracteristicas, String enfermedades) {
+        PerroEnAdopcion perroEnAdopcion = new PerroEnAdopcion(nombre, raza, edad, sexo, email, telefono, caracteristicas, enfermedades);
         persist(perroEnAdopcion);
         return perroEnAdopcion;
     }

@@ -9,6 +9,8 @@ public class PerroEnAdopcionRequest {
     private String sexo;
     private String email;
     private Long telefono;
+    private String enfermedades;
+    private String caracteristicas;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -18,6 +20,12 @@ public class PerroEnAdopcionRequest {
         return nombre;
     }
 
+    public String getEnfermedades() {
+        return enfermedades;
+    }
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
     public String getRaza() {
         return raza;
     }
