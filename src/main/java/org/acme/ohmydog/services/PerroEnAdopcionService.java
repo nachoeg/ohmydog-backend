@@ -43,6 +43,17 @@ public class PerroEnAdopcionService {
     }
 
     @Transactional
+    public boolean modificarEstadoPerro(Long id) {
+        PerroEnAdopcion perro = perroEnAdopcionRepository.buscarPerroPorId(id);
+        if (perro == null) {
+            return false;
+        }
+        perro.setEstado("Adoptado");
+        perroEnAdopcionRepository.persist(perro);
+        return true;
+    }
+
+    @Transactional
     public List<PerroEnAdopcion> listarPerrosEnAdopcion() {
         return perroEnAdopcionRepository.listarPerrosEnAdopcion();
     }

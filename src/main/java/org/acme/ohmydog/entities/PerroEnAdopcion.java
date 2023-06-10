@@ -49,6 +49,10 @@ public class PerroEnAdopcion extends PanacheEntityBase {
         this.estado = "Pendiente";
     }
 
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
+
     public Long getIdUsuario(){
         return this.idUsuario;
     }
