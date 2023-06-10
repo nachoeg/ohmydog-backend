@@ -21,21 +21,18 @@ public class PerroEnAdopcionController {
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response register(@HeaderParam("token") String token, PerroEnAdopcionRequest perroEnAdopcionRequest) {
-        if ((authService.isLoggedIn(token) && (authService.esCliente()))) {
+    public Response register(PerroEnAdopcionRequest perroEnAdopcionRequest) {
             if (perroEnAdopcionService.register(perroEnAdopcionRequest)) {
                 return Response.ok().build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response listarPerrosEnAdopcion(@HeaderParam("token") String token) {
+    public Response listarPerrosEnAdopcion() {
             return Response.ok(perroEnAdopcionService.listarPerrosEnAdopcion()).build();
     }
 }

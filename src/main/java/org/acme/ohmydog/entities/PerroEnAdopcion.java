@@ -10,6 +10,8 @@ public class PerroEnAdopcion extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "idUsuario")
+    private Long idUsuario;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "raza")
@@ -34,7 +36,8 @@ public class PerroEnAdopcion extends PanacheEntityBase {
 
     }
 
-    public PerroEnAdopcion(String nombre, String raza, int edad, String sexo, String email, Long telefono, String caracteristicas, String enfermedades) {
+    public PerroEnAdopcion(Long idUsuario, String nombre, String raza, int edad, String sexo, String email, Long telefono, String caracteristicas, String enfermedades) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -44,6 +47,10 @@ public class PerroEnAdopcion extends PanacheEntityBase {
         this.caracteristicas = caracteristicas;
         this.enfermedades = enfermedades;
         this.estado = "Pendiente";
+    }
+
+    public Long getIdUsuario(){
+        return this.idUsuario;
     }
 
     public Long getId() {

@@ -22,11 +22,11 @@ public class PerroEnAdopcionService {
 
     @Transactional
     public boolean register(PerroEnAdopcionRequest perroEnAdopcionRequest) {
-        Usuario usuario = usuarioRepository.buscarUsuarioPorId(perroEnAdopcionRequest.getIdUsuario());
-        if (usuario == null) {
-            return false;
-        }
-        PerroEnAdopcion perroEnAdopcion = perroEnAdopcionRepository.register(perroEnAdopcionRequest.getNombre(),
+        // Usuario usuario = usuarioRepository.buscarUsuarioPorId(perroEnAdopcionRequest.getIdUsuario());
+        // if (usuario == null) {
+        //     return false;
+        // }
+        PerroEnAdopcion perroEnAdopcion = perroEnAdopcionRepository.register(perroEnAdopcionRequest.getIdUsuario(),perroEnAdopcionRequest.getNombre(),
                 perroEnAdopcionRequest.getRaza(), perroEnAdopcionRequest.getEdad(), perroEnAdopcionRequest.getSexo(),
                 perroEnAdopcionRequest.getEmail(), perroEnAdopcionRequest.getTelefono(), perroEnAdopcionRequest.getCaracteristicas(), perroEnAdopcionRequest.getEnfermedades());
         return true;
