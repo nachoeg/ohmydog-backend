@@ -54,6 +54,7 @@ public class PerroService {
         if (perro == null) {
             return false;
         }
+        usuarioRepository.buscarUsuarioPorId(perro.getUsuarioId()).eliminarPerro(perro);
         perroRepository.eliminate(perro);
         return true;
     }

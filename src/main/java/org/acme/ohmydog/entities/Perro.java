@@ -147,6 +147,10 @@ public class Perro extends PanacheEntityBase {
         return this.vacunaAntienfermedades;
     }
 
+    public Long getUsuarioId() {
+        return this.usuario.getId();
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
