@@ -29,7 +29,7 @@ public class PerroController {
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
         }
-         return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PUT
@@ -37,11 +37,12 @@ public class PerroController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response modificarPerro(@HeaderParam("token") String token, @PathParam("id") Long id,
-                                     PerroRequest perroRequest) {
+            PerroRequest perroRequest) {
         if (authService.isLoggedIn(token)) {
             if (perroService.modificarPerro(id, perroRequest.getNombre(), perroRequest.getRaza(),
                     perroRequest.getEdad(), perroRequest.getEnfermedad(), perroRequest.getSexo(),
-                    perroRequest.getCaracteristicas())) {
+                    perroRequest.getCaracteristicas(), perroRequest.getCastrado(), perroRequest.getVacunaAntirrabica(),
+                    perroRequest.getVacunaAntienfermedades())) {
                 return Response.ok().build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
@@ -86,5 +87,14 @@ public class PerroController {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
+    @GET
+    @Path("/perroPorId/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getPerroPorId(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token)) {
+            return Response.ok(perroService.buscarPerroPorId(id)).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }
-

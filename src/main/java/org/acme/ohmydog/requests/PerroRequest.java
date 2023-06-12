@@ -1,5 +1,7 @@
 package org.acme.ohmydog.requests;
 
+import java.time.LocalDate;
+
 public class PerroRequest {
 
     private Long idUsuario;
@@ -9,9 +11,13 @@ public class PerroRequest {
     private String enfermedad;
     private String sexo;
     private String caracteristicas;
+    private boolean castrado;
+    private LocalDate vacunaAntirrabica;
+    private LocalDate vacunaAntienfemerdades;
 
     public PerroRequest(Long idUsuario, String nombre, String raza, int edad, String enfermedad,
-        String sexo, String caracteristicas) {
+            String sexo, String caracteristicas, boolean castrado, LocalDate vacunaAntirrabica,
+            LocalDate vacunaAntienfermedades) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.raza = raza;
@@ -19,6 +25,9 @@ public class PerroRequest {
         this.enfermedad = enfermedad;
         this.sexo = sexo;
         this.caracteristicas = caracteristicas;
+        this.castrado = castrado;
+        this.vacunaAntirrabica = vacunaAntirrabica;
+        this.vacunaAntienfemerdades = vacunaAntienfermedades;
     }
 
     public Long getIdUsuario() {
@@ -32,6 +41,7 @@ public class PerroRequest {
     public String getRaza() {
         return this.raza;
     }
+
     public int getEdad() {
         return this.edad;
     }
@@ -48,4 +58,15 @@ public class PerroRequest {
         return this.caracteristicas;
     }
 
+    public LocalDate getVacunaAntirrabica() {
+        return this.vacunaAntirrabica;
+    }
+
+    public LocalDate getVacunaAntienfermedades() {
+        return this.vacunaAntienfemerdades;
+    }
+
+    public boolean getCastrado() {
+        return this.castrado;
+    }
 }
