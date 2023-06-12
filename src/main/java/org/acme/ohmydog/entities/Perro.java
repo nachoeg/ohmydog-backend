@@ -28,6 +28,8 @@ public class Perro extends PanacheEntityBase {
     private String sexo;
     @Column(name = "caracteristicas")
     private String caracteristicas;
+    @Column(name = "castrado")
+    private boolean castrado;
 
     @Column(name = "vacunaAntirrabica")
     private LocalDate vacunaAntirrabica;
@@ -43,11 +45,11 @@ public class Perro extends PanacheEntityBase {
     @JoinColumn(name = "perro_id")
     private List<Turno> turnos;
 
-    public Perro(){
+    public Perro() {
     }
 
     public Perro(String nombre, String raza, int edad, String enfermedad,
-        String sexo, String caracteristicas) {
+            String sexo, String caracteristicas) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -57,6 +59,7 @@ public class Perro extends PanacheEntityBase {
         this.turnos = new ArrayList<>();
         this.vacunaAntirrabica = null;
         this.vacunaAntienfermedades = null;
+        this.castrado = false;
     }
 
     public Long getId() {
@@ -72,8 +75,7 @@ public class Perro extends PanacheEntityBase {
             if (this.vacunaAntirrabica == null) {
                 this.vacunaAntirrabica = fecha;
                 return true;
-            }
-            else {
+            } else {
                 Period periodo = this.vacunaAntirrabica.until(fecha);
                 if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
                     this.vacunaAntirrabica = fecha;
@@ -89,13 +91,12 @@ public class Perro extends PanacheEntityBase {
             if (this.vacunaAntienfermedades == null) {
                 this.vacunaAntienfermedades = fecha;
                 return true;
-            }
-            else if (this.getEdad() <= 4) {
-                    Period periodo = this.vacunaAntienfermedades.until(fecha);
-                    if (periodo.getYears() >= 0 && periodo.getMonths() >= 0 && periodo.getDays() >= 21) {
-                        this.vacunaAntienfermedades = fecha;
-                        return true;
-                    }
+            } else if (this.getEdad() <= 4) {
+                Period periodo = this.vacunaAntienfermedades.until(fecha);
+                if (periodo.getYears() >= 0 && periodo.getMonths() >= 0 && periodo.getDays() >= 21) {
+                    this.vacunaAntienfermedades = fecha;
+                    return true;
+                }
             } else {
                 Period periodo = this.vacunaAntienfermedades.until(fecha);
                 if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
@@ -113,6 +114,10 @@ public class Perro extends PanacheEntityBase {
 
     public String getNombre() {
         return this.nombre;
+    }
+
+    public boolean getCastrado() {
+        return this.castrado;
     }
 
     public String getRaza() {
@@ -157,6 +162,10 @@ public class Perro extends PanacheEntityBase {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setCastrado(boolean castrado) {
+        this.castrado = castrado;
     }
 
     public void setRaza(String raza) {

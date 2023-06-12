@@ -1,4 +1,5 @@
 package org.acme.ohmydog.services;
+
 import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
@@ -8,6 +9,7 @@ import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.PerroRequest;
 import org.acme.ohmydog.entities.Usuario;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @ApplicationScoped
@@ -33,7 +35,7 @@ public class PerroService {
 
     @Transactional
     public boolean modificarPerro(Long id, String nombre, String raza, int edad, String enfermedad, String sexo,
-                                  String caracteristicas) {
+            String caracteristicas, boolean castrado, LocalDate vacunaAntirrabica, LocalDate vacunaAntienfermedades) {
         Perro perro = perroRepository.buscarPerroPorId(id);
         if (perro == null) {
             return false;
@@ -44,6 +46,9 @@ public class PerroService {
         perro.setEnfermedad(enfermedad);
         perro.setSexo(sexo);
         perro.setCaracteristicas(caracteristicas);
+        perro.setCastrado(castrado);
+        perro.setVacunaAntienfermedades(vacunaAntienfermedades);
+        perro.setVacunaAntirrabica(vacunaAntirrabica);
         perroRepository.persist(perro);
         return true;
     }
@@ -73,6 +78,12 @@ public class PerroService {
         return perroRepository.listarPerrosCliente(usuario);
     }
 
+    @Transactional
+    public Perro buscarPerroPorId(Long id) {
+        Perro perro = perroRepository.buscarPerroPorId(id);
+        if (perro == null) {
+            return null;
+        }
+        return perro;
+    }
 }
-
-
