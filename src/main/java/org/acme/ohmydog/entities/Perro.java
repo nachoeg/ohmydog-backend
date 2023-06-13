@@ -108,8 +108,12 @@ public class Perro extends PanacheEntityBase {
         return false;
     }
 
-    public boolean puedeCastracion() {
-        return true;
+    public boolean noPuedeCastracion() {
+        return this.castrado;
+    }
+
+    public void castrar() {
+        this.castrado = true;
     }
 
     public String getNombre() {

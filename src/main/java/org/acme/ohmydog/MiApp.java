@@ -31,18 +31,14 @@ public class MiApp {
         entityManager.persist(usuario2);
         entityManager.persist(usuario3);
 
-        Perro perro1 = new Perro("Perro1", "Raza", 6, "Ninguna", "Masculino", "Caracteristicas");
-        Perro perro2 = new Perro("Perro2", "Raza", 4, "Ninguna", "Masculino", "Caracteristicas");
+        Perro perro1 = new Perro("Perro1", "Raza1", 6, "Ninguna", "Masculino", "Caracteristicas");
+        Perro perro2 = new Perro("Perro2", "Raza2", 4, "Ninguna", "Masculino", "Caracteristicas");
+        Perro perro3 = new Perro("Perro3", "Raza3", 1, "Ninguna", "Masculino", "Caracteristicas");
         entityManager.persist(perro1);
         entityManager.persist(perro2);
         usuario1.agregarPerro(perro1);
         usuario2.agregarPerro(perro2);
+        usuario2.agregarPerro(perro3);
 
-        Turno turno1 = new Turno(1L,LocalDate.of(2023, 7, 6), "Vacuna Antirrabica");
-        Turno turno2 = new Turno(2L,LocalDate.of(2023, 7, 6), "Vacuna Antirrabica");
-        entityManager.persist(turno1);
-        entityManager.persist(turno2);
-        perro1.agregarTurno(turno1);
-        perro2.agregarTurno(turno2);
     }
 }

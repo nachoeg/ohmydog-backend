@@ -26,9 +26,11 @@ public class PerroEnAdopcionService {
         // if (usuario == null) {
         //     return false;
         // }
-        PerroEnAdopcion perroEnAdopcion = perroEnAdopcionRepository.register(perroEnAdopcionRequest.getIdUsuario(),perroEnAdopcionRequest.getNombre(),
-                perroEnAdopcionRequest.getRaza(), perroEnAdopcionRequest.getEdad(), perroEnAdopcionRequest.getSexo(),
-                perroEnAdopcionRequest.getEmail(), perroEnAdopcionRequest.getTelefono(), perroEnAdopcionRequest.getCaracteristicas(), perroEnAdopcionRequest.getEnfermedades());
+        PerroEnAdopcion perroEnAdopcion = perroEnAdopcionRepository.register(perroEnAdopcionRequest.getIdUsuario(),
+                perroEnAdopcionRequest.getNombre(), perroEnAdopcionRequest.getRaza(), perroEnAdopcionRequest.getEdad(),
+                perroEnAdopcionRequest.getSexo(), perroEnAdopcionRequest.getEmail(),
+                perroEnAdopcionRequest.getTelefono(), perroEnAdopcionRequest.getCaracteristicas(),
+                perroEnAdopcionRequest.getEnfermedades());
         return true;
     }
 
