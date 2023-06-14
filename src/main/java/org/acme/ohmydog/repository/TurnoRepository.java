@@ -12,8 +12,8 @@ import java.util.List;
 @ApplicationScoped
 public class TurnoRepository implements PanacheRepository<Turno> {
 
-    public Turno register(Long idPerro, LocalDate fecha, String motivo) {
-        Turno turno = new Turno(idPerro, fecha, motivo);
+    public Turno register(Long idPerro, String nombre, LocalDate fecha, String motivo) {
+        Turno turno = new Turno(idPerro, nombre, fecha, motivo);
         persist(turno);
         return turno;
     }

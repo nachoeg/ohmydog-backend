@@ -96,4 +96,36 @@ public class PerroEnAdopcion extends PanacheEntityBase {
     public String getDescripcion() {
         return this.descripcion;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelefono(Long telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
