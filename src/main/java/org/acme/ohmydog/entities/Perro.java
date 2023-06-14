@@ -118,11 +118,10 @@ public class Perro extends PanacheEntityBase {
     }
 
     public boolean puedeTomarTurno(String motivo) {
-        return this.turnos.stream()
-                .filter(turno -> turno.getMotivo()
-                        .equals(motivo)).findFirst()
-                .map(turno -> !Objects.equals(turno.getEstado(), "Pendiente"))
-                .orElse(false);
+        Turno turno = this.turnos.stream()
+                .filter(turno1 -> turno1.getMotivo().equals(motivo))
+                .findFirst().orElse(null);
+        return (turno == null) || (!Objects.equals(turno.getEstado(), "Pendiente"));
     }
 
     public String getNombre() {
