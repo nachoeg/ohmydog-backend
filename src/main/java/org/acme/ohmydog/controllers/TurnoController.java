@@ -4,6 +4,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.ohmydog.excepciones.ExcepcionCastrado;
+import org.acme.ohmydog.excepciones.ExcepcionTurno;
 import org.acme.ohmydog.requests.TurnoRequest;
 import org.acme.ohmydog.services.AuthService;
 import org.acme.ohmydog.services.TurnoService;
@@ -22,14 +24,20 @@ public class TurnoController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("token") String token, TurnoRequest turnoRequest) {
-        if (authService.isLoggedIn(token) && (authService.esCliente())) {
-            if (turnoService.register(turnoRequest) ) {
-                return Response.ok().build();
-            } else {
-                return Response.status(Response.Status.BAD_REQUEST).build();
+        try {
+            if (authService.isLoggedIn(token) && (authService.esCliente())) {
+                if (turnoService.register(turnoRequest)) {
+                    return Response.ok().build();
+                } else {
+                    return Response.status(Response.Status.BAD_REQUEST).build();
+                }
             }
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        } catch (ExcepcionCastrado e) {
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (ExcepcionTurno e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
-        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
     @PUT // Indica que se esta realizando una operación de actualizacion

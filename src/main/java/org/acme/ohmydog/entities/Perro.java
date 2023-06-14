@@ -8,6 +8,7 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "PERRO")
@@ -114,6 +115,14 @@ public class Perro extends PanacheEntityBase {
 
     public void castrar() {
         this.castrado = true;
+    }
+
+    public boolean puedeTomarTurno(String motivo) {
+        return this.turnos.stream()
+                .filter(turno -> turno.getMotivo()
+                        .equals(motivo)).findFirst()
+                .map(turno -> !Objects.equals(turno.getEstado(), "Pendiente"))
+                .orElse(false);
     }
 
     public String getNombre() {

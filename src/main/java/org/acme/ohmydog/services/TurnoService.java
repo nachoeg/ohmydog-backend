@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.entities.Usuario;
+import org.acme.ohmydog.excepciones.ExcepcionCastrado;
+import org.acme.ohmydog.excepciones.ExcepcionTurno;
 import org.acme.ohmydog.repository.PerroRepository;
 import org.acme.ohmydog.repository.TurnoRepository;
 import org.acme.ohmydog.repository.UsuarioRepository;
@@ -29,24 +31,32 @@ public class TurnoService {
     UsuarioRepository usuarioRepository;
 
     @Transactional
-    public boolean register(TurnoRequest turnoRequest) {
+    public boolean register(TurnoRequest turnoRequest) throws ExcepcionCastrado, ExcepcionTurno {
         Perro perro = perroRepository.buscarPerroPorId(turnoRequest.getIdPerro());
         if (perro == null) {
             return false;
         }
-        if (Objects.equals(turnoRequest.getMotivo(), "Vacuna Antirrabica")) {
-            if (!perro.puedeVacunaAntirrabica(turnoRequest.getFecha())) {
-                return false;
+        if (perro.puedeTomarTurno(turnoRequest.getMotivo())) {
+            switch (turnoRequest.getMotivo()) {
+                case "Vacuna Antirrabica":
+                    if (!perro.puedeVacunaAntirrabica(turnoRequest.getFecha())) {
+                        return false;
+                    }
+                    break;
+                case "Vacuna Antienfermedades":
+                    if (!perro.puedeVacunaAntienfermedades(turnoRequest.getFecha())) {
+                        return false;
+                    }
+                    break;
+                case "Castracion":
+                    if (perro.noPuedeCastracion()) {
+                        throw new ExcepcionCastrado("El perro no puede castrarse.");
+                    }
+                    break;
             }
-        } else if (Objects.equals(turnoRequest.getMotivo(), "Vacuna Antienfermedades")) {
-            if (!perro.puedeVacunaAntienfermedades(turnoRequest.getFecha())) {
-                return false;
-            }
-        } else if (Objects.equals(turnoRequest.getMotivo(), "Castracion")) {
-                if (perro.noPuedeCastracion()) {
-                    return false;
-                }
-                perro.castrar();
+        }
+        else {
+            throw new ExcepcionTurno("No puede registrar un turno teniendo uno pendiente.");
         }
         Turno turno = turnoRepository.register(perro.getId(), perro.getNombre(), turnoRequest.getFecha(), turnoRequest.getMotivo());
         perro.agregarTurno(turno);
