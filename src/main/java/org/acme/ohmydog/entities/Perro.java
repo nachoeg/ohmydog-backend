@@ -77,9 +77,7 @@ public class Perro extends PanacheEntityBase {
                 return true;
             } else {
                 Period periodo = this.vacunaAntirrabica.until(fecha);
-                if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
-                    return true;
-                }
+                return periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0;
             }
         }
         return false;
@@ -91,14 +89,10 @@ public class Perro extends PanacheEntityBase {
                 return true;
             } else if (this.getEdad() <= 4) {
                 Period periodo = this.vacunaAntienfermedades.until(fecha);
-                if (periodo.getYears() >= 0 && periodo.getMonths() >= 0 && periodo.getDays() >= 21) {
-                    return true;
-                }
+                return periodo.getYears() >= 0 && periodo.getMonths() >= 0 && periodo.getDays() >= 21;
             } else {
                 Period periodo = this.vacunaAntienfermedades.until(fecha);
-                if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
-                    return true;
-                }
+                return periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0;
             }
         }
         return false;
