@@ -7,42 +7,42 @@ public class PerroEnAdopcionRequest {
     private String raza;
     private int edad;
     private String sexo;
+    private String caracteristicas;
+    private String descripcion;
     private String email;
     private Long telefono;
-    private String enfermedades;
-    private String caracteristicas;
 
     public Long getIdUsuario() {
-        return idUsuario;
+        return this.idUsuario;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
-    public String getEnfermedades() {
-        return enfermedades;
+    public String getDescripcion() {
+        return this.descripcion;
     }
     public String getCaracteristicas() {
-        return caracteristicas;
+        return this.caracteristicas;
     }
     public String getRaza() {
-        return raza;
+        return this.raza;
     }
 
     public int getEdad() {
-        return edad;
+        return this.edad;
     }
 
     public String getSexo() {
-        return sexo;
+        return this.sexo;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public Long getTelefono() {
-        return telefono;
+        return this.telefono;
     }
 }
