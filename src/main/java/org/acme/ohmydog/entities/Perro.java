@@ -74,12 +74,10 @@ public class Perro extends PanacheEntityBase {
     public boolean puedeVacunaAntirrabica(LocalDate fecha) {
         if (this.getEdad() > 4) {
             if (this.vacunaAntirrabica == null) {
-                this.vacunaAntirrabica = fecha;
                 return true;
             } else {
                 Period periodo = this.vacunaAntirrabica.until(fecha);
                 if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
-                    this.vacunaAntirrabica = fecha;
                     return true;
                 }
             }
@@ -90,18 +88,15 @@ public class Perro extends PanacheEntityBase {
     public boolean puedeVacunaAntienfermedades(LocalDate fecha) {
         if (this.getEdad() > 2) {
             if (this.vacunaAntienfermedades == null) {
-                this.vacunaAntienfermedades = fecha;
                 return true;
             } else if (this.getEdad() <= 4) {
                 Period periodo = this.vacunaAntienfermedades.until(fecha);
                 if (periodo.getYears() >= 0 && periodo.getMonths() >= 0 && periodo.getDays() >= 21) {
-                    this.vacunaAntienfermedades = fecha;
                     return true;
                 }
             } else {
                 Period periodo = this.vacunaAntienfermedades.until(fecha);
                 if (periodo.getYears() >= 1 && periodo.getMonths() >= 0 && periodo.getDays() >= 0) {
-                    this.vacunaAntienfermedades = fecha;
                     return true;
                 }
             }
@@ -116,6 +111,10 @@ public class Perro extends PanacheEntityBase {
     public void castrar() {
         this.castrado = true;
     }
+
+    public void vacunarAntirrabica(LocalDate fecha) { this.vacunaAntirrabica = fecha; }
+
+    public void vacunarAntienfermedades(LocalDate fecha) { this.vacunaAntirrabica = fecha; }
 
     public boolean puedeTomarTurno(String motivo) {
         Turno turno = this.turnos.stream()

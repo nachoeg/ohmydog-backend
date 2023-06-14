@@ -9,6 +9,7 @@ C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\entities\Sesion.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\requests\LoginRequest.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\repository\UsuarioRepository.java
+C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\excepciones\ExcepcionTurno.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\controllers\AuthController.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\services\PerroEnAdopcionService.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\repository\TurnoRepository.java
@@ -24,3 +25,4 @@ C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\controllers\PerroEnAdopcionController.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\requests\TurnoRequest.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\entities\Perro.java
+C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\excepciones\ExcepcionCastrado.java
