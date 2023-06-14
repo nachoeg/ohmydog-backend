@@ -48,7 +48,29 @@ public class PerroEnAdopcionController {
     @Path("/modify/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response modificarEstadoPerro(@HeaderParam("token") String token, @PathParam("id") Long id) {
+    public Response modificarPerro(@HeaderParam("token") String token, @PathParam("id") Long id, PerroEnAdopcionRequest perroRequest) {
+        if (authService.isLoggedIn(token)) {
+            if (perroEnAdopcionService.modificarPerro(id,
+            perroRequest.getNombre(), 
+            perroRequest.getRaza(),
+            perroRequest.getSexo(),
+            perroRequest.getEdad(), 
+            perroRequest.getCaracteristicas(),
+            perroRequest.getEnfermedades(), perroRequest.getTelefono(), perroRequest.getEmail())) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+
+    @PUT
+    @Path("/adoptar/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response adoptarPerro(@HeaderParam("token") String token, @PathParam("id") Long id) {
         if (authService.isLoggedIn(token)) {
             if (perroEnAdopcionService.modificarEstadoPerro(id)) {
                 return Response.ok().build();
