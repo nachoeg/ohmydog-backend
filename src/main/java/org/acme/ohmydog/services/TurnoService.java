@@ -48,7 +48,7 @@ public class TurnoService {
                 }
                 perro.castrar();
         }
-        Turno turno = turnoRepository.register(perro.getId(), turnoRequest.getFecha(), turnoRequest.getMotivo());
+        Turno turno = turnoRepository.register(perro.getId(), perro.getNombre(), turnoRequest.getFecha(), turnoRequest.getMotivo());
         perro.agregarTurno(turno);
         return true;
     }

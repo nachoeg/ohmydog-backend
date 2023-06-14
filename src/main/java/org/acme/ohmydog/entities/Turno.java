@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "TURNO")
 public class Turno extends PanacheEntityBase {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +18,8 @@ public class Turno extends PanacheEntityBase {
 
     @Column(name = "idPerro")
     private Long idPerro;
+    @Column(name = "nombre")
+    private String nombre;
     @Column(name = "fecha")
     private LocalDate fecha;
     @Column(name = "motivo")
@@ -28,11 +31,16 @@ public class Turno extends PanacheEntityBase {
     public Turno() {
     }
 
-    public Turno(Long idPerro, LocalDate fecha, String motivo) {
+    public Turno(Long idPerro, String nombre, LocalDate fecha, String motivo) {
         this.idPerro = idPerro;
+        this.nombre = nombre;
         this.fecha = fecha;
         this.motivo = motivo;
         this.estado = "Pendiente";
+    }
+
+    public String getNombre() {
+        return this.nombre;
     }
 
     public Long getId() {
