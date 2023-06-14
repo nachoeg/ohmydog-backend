@@ -168,6 +168,10 @@ public class Perro extends PanacheEntityBase {
         return this.usuario.getId();
     }
 
+    public String getUsuarioNombreyApellido() {
+        return this.usuario.getNombre() + " " + this.usuario.getApellido();
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
