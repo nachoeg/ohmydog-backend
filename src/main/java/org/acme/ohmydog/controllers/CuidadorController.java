@@ -31,4 +31,45 @@ public class CuidadorController {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    @PUT
+    @Path("/modify/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response modificarCuidador(@HeaderParam("token") String token, @PathParam("id") Long id,
+                                     CuidadorRequest cuidadorRequest) {
+        if (authService.isLoggedIn(token)) {
+            if (cuidadorService.modificarCuidador(id, cuidadorRequest)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response eliminarCuidador(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
+            if (cuidadorService.eliminarCuidador(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response listarCuidador(@HeaderParam("token") String token) {
+        if (authService.isLoggedIn(token)) {
+            return Response.ok(cuidadorService.listarCuidador()).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }

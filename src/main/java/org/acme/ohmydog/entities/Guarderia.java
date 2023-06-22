@@ -16,18 +16,18 @@ public class Guarderia extends PanacheEntityBase {
     private String disponibilidad;
     @Column(name = "telefono")
     private Long telefono;
-    @Column(name = "mail")
-    private String mail;
+    @Column(name = "email")
+    private String email;
     @Column(name = "localidad")
     private String localidad;
     @Column(name = "direccion")
     private String direccion;
 
-    public Guarderia(String nombre, String disponibilidad, Long telefono, String mail, String localidad, String direccion) {
+    public Guarderia(String nombre, String disponibilidad, Long telefono, String email, String localidad, String direccion) {
         this.nombre = nombre;
         this.disponibilidad = disponibilidad;
         this.telefono = telefono;
-        this.mail = mail;
+        this.email = email;
         this.localidad = localidad;
         this.direccion = direccion;
     }
@@ -44,8 +44,8 @@ public class Guarderia extends PanacheEntityBase {
         return this.telefono;
     }
 
-    public String getMail() {
-        return this.mail;
+    public String getEmail() {
+        return this.email;
     }
 
     public String getLocalidad() {
@@ -68,8 +68,8 @@ public class Guarderia extends PanacheEntityBase {
         this.telefono = telefono;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setLocalidad(String localidad) {

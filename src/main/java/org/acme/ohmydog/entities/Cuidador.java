@@ -72,7 +72,7 @@ public class Cuidador extends PanacheEntityBase {
         this.telefono = telefono;
     }
 
-    public void setMail(String mail) {
+    public void setEmail(String mail) {
         this.mail = mail;
     }
 
