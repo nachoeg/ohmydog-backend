@@ -5,7 +5,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.acme.ohmydog.entities.PerroEnAdopcion;
 import org.acme.ohmydog.repository.PerroEnAdopcionRepository;
-import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.PerroEnAdopcionRequest;
 
 import java.util.List;
@@ -16,8 +15,6 @@ public class PerroEnAdopcionService {
     @Inject
     PerroEnAdopcionRepository perroEnAdopcionRepository;
 
-    @Inject
-    UsuarioRepository usuarioRepository;
 
     @Transactional
     public boolean register(PerroEnAdopcionRequest perroEnAdopcionRequest) {

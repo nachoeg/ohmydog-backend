@@ -8,15 +8,6 @@ public class GuarderiaRequest {
     private String localidad;
     private String direccion;
 
-    public GuarderiaRequest(String nombre, String disponibilidad, Long telefono, String email, String localidad, String direccion) {
-        this.nombre = nombre;
-        this.disponibilidad = disponibilidad;
-        this.telefono = telefono;
-        this.email = email;
-        this.localidad = localidad;
-        this.direccion = direccion;
-    }
-
     public String getNombre() {
         return this.nombre;
     }

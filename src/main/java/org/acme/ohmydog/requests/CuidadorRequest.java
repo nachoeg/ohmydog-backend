@@ -8,15 +8,6 @@ public class CuidadorRequest {
     private String email;
     private String zona;
 
-    public CuidadorRequest(String nombre, String apellido, Long dni, Long telefono, String email, String zona) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.email = email;
-        this.zona = zona;
-    }
-
     public String getNombre() {
         return this.nombre;
     }
