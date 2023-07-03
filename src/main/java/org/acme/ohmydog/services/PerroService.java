@@ -30,8 +30,8 @@ public class PerroService {
             return false;
         }
         if (usuario.coincideNombrePerro(perroRequest.getNombre())) {
-            throw new ExcepcionNombrePerro("El perro no puede registrarse ya que el usuario tiene otro con el " +
-                    "mismo nombre.");
+            throw new ExcepcionNombrePerro("El perro no puede registrarse ya que el usuario tiene otro perro " +
+                    "con el mismo nombre.");
         }
         Perro perro = perroRepository.register(perroRequest.getNombre(), perroRequest.getRaza(), perroRequest.getEdad(),
                 perroRequest.getEnfermedad(), perroRequest.getSexo(), perroRequest.getCaracteristicas());
