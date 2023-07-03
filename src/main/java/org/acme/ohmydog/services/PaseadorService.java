@@ -37,6 +37,7 @@ public class PaseadorService {
         paseador.setTelefono(paseadorRequest.getTelefono());
         paseador.setEmail(paseadorRequest.getEmail());
         paseador.setZona(paseadorRequest.getZona());
+        paseador.setEstado(paseadorRequest.getEstado());
         paseadorRepository.persist(paseador);
         return true;
     }

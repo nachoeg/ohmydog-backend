@@ -22,6 +22,8 @@ public class Paseador extends PanacheEntityBase {
     private String email;
     @Column(name = "zona")
     private String zona;
+    @Column(name = "estado")
+    private boolean estado;
 
     public Paseador() {
 
@@ -34,6 +36,7 @@ public class Paseador extends PanacheEntityBase {
         this.telefono = telefono;
         this.email = email;
         this.zona = zona;
+        this.estado = true;
     }
 
     public String getNombre() {
@@ -60,6 +63,10 @@ public class Paseador extends PanacheEntityBase {
         return this.zona;
     }
 
+    public Boolean getEstado() {
+        return this.estado;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -82,5 +89,9 @@ public class Paseador extends PanacheEntityBase {
 
     public void setZona(String zona) {
         this.zona = zona;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }

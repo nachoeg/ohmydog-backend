@@ -18,22 +18,25 @@ public class Cuidador extends PanacheEntityBase {
     private Long dni;
     @Column(name = "telefono")
     private Long telefono;
-    @Column(name = "mail")
-    private String mail;
+    @Column(name = "email")
+    private String email;
     @Column(name = "zona")
     private String zona;
+    @Column(name = "estado")
+    private boolean estado;
 
     public Cuidador() {
 
     }
 
-    public Cuidador(String nombre, String apellido, Long dni, Long telefono, String mail, String zona) {
+    public Cuidador(String nombre, String apellido, Long dni, Long telefono, String email, String zona) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
-        this.mail = mail;
+        this.email = email;
         this.zona = zona;
+        this.estado = true;
     }
 
     public String getNombre() {
@@ -53,11 +56,15 @@ public class Cuidador extends PanacheEntityBase {
     }
 
     public String getEmail() {
-        return this.mail;
+        return this.email;
     }
 
     public String getZona() {
         return this.zona;
+    }
+
+    public boolean getEstado() {
+        return this.estado;
     }
 
     public void setNombre(String nombre) {
@@ -77,10 +84,14 @@ public class Cuidador extends PanacheEntityBase {
     }
 
     public void setEmail(String mail) {
-        this.mail = mail;
+        this.email = email;
     }
 
     public void setZona(String zona) {
         this.zona = zona;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }
