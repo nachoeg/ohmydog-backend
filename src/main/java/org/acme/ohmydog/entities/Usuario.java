@@ -67,6 +67,10 @@ public class Usuario extends PanacheEntityBase {
         return this.getPassword().equals(contrasena);
     }
 
+    public boolean coincideNombrePerro(String nombrePerro) {
+        return this.getPerros().stream().anyMatch(perro -> perro.getNombre().equals(nombrePerro));
+    }
+
     public Long getId() {
         return this.id;
     }

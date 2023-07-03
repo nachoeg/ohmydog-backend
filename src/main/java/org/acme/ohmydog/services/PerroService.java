@@ -4,6 +4,8 @@ import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.acme.ohmydog.entities.Perro;
+import org.acme.ohmydog.excepciones.ExcepcionCastrado;
+import org.acme.ohmydog.excepciones.ExcepcionNombrePerro;
 import org.acme.ohmydog.repository.PerroRepository;
 import org.acme.ohmydog.repository.UsuarioRepository;
 import org.acme.ohmydog.requests.PerroRequest;
@@ -22,10 +24,14 @@ public class PerroService {
     UsuarioRepository usuarioRepository;
 
     @Transactional
-    public boolean register(PerroRequest perroRequest) {
+    public boolean register(PerroRequest perroRequest) throws ExcepcionNombrePerro {
         Usuario usuario = usuarioRepository.buscarUsuarioPorId(perroRequest.getIdUsuario());
         if (usuario == null) {
             return false;
+        }
+        if (usuario.coincideNombrePerro(perroRequest.getNombre())) {
+            throw new ExcepcionNombrePerro("El perro no puede registrarse ya que el usuario tiene otro con el " +
+                    "mismo nombre.");
         }
         Perro perro = perroRepository.register(perroRequest.getNombre(), perroRequest.getRaza(), perroRequest.getEdad(),
                 perroRequest.getEnfermedad(), perroRequest.getSexo(), perroRequest.getCaracteristicas());
@@ -86,4 +92,5 @@ public class PerroService {
         }
         return perro;
     }
+
 }
