@@ -7,6 +7,7 @@ public class PaseadorRequest {
     private Long telefono;
     private String email;
     private String zona;
+    private boolean estado;
 
     public String getNombre() {
         return this.nombre;
@@ -30,5 +31,9 @@ public class PaseadorRequest {
 
     public String getZona() {
         return this.zona;
+    }
+
+    public boolean getEstado() {
+        return this.estado;
     }
 }

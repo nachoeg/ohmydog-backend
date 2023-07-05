@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.acme.ohmydog.excepciones.ExcepcionNombrePerro;
 import org.acme.ohmydog.requests.PerroRequest;
 import org.acme.ohmydog.services.PerroService;
 import org.acme.ohmydog.services.AuthService;
@@ -22,14 +23,18 @@ public class PerroController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("token") String token, PerroRequest perroRequest) {
-        if ((authService.isLoggedIn(token) && (authService.esVeterinario()))) {
-            if (perroService.register(perroRequest)) {
-                return Response.ok().build();
-            } else {
-                return Response.status(Response.Status.BAD_REQUEST).build();
+        try {
+            if ((authService.isLoggedIn(token) && (authService.esVeterinario()))) {
+                if (perroService.register(perroRequest)) {
+                    return Response.ok().build();
+                } else {
+                    return Response.status(Response.Status.BAD_REQUEST).build();
+                }
             }
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ExcepcionNombrePerro e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
-        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PUT

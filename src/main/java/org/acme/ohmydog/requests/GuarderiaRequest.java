@@ -7,6 +7,7 @@ public class GuarderiaRequest {
     private String email;
     private String localidad;
     private String direccion;
+    private boolean estado;
 
     public String getNombre() {
         return this.nombre;
@@ -30,6 +31,10 @@ public class GuarderiaRequest {
 
     public String getDireccion() {
         return this.direccion;
+    }
+
+    public boolean getEstado() {
+        return this.estado;
     }
 
 }

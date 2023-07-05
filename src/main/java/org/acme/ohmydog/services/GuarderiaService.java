@@ -38,6 +38,7 @@ public class GuarderiaService {
         guarderia.setEmail(guarderiaRequest.getEmail());
         guarderia.setLocalidad(guarderiaRequest.getLocalidad());
         guarderia.setDireccion(guarderiaRequest.getDireccion());
+        guarderia.setEstado(guarderiaRequest.getEstado());
         guarderiaRepository.persist(guarderia);
         return true;
     }

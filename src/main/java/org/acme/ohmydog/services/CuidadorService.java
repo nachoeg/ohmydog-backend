@@ -37,6 +37,7 @@ public class CuidadorService {
         cuidador.setTelefono(cuidadorRequest.getTelefono());
         cuidador.setEmail(cuidadorRequest.getEmail());
         cuidador.setZona(cuidadorRequest.getZona());
+        cuidador.setEstado(cuidadorRequest.getEstado());
         cuidadorRepository.persist(cuidador);
         return true;
     }

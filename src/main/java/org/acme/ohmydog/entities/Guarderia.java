@@ -23,6 +23,9 @@ public class Guarderia extends PanacheEntityBase {
     @Column(name = "direccion")
     private String direccion;
 
+    @Column(name = "estado")
+    private boolean estado;
+
     public Guarderia() {
 
     }
@@ -35,6 +38,7 @@ public class Guarderia extends PanacheEntityBase {
         this.email = email;
         this.localidad = localidad;
         this.direccion = direccion;
+        this.estado = true;
     }
 
     public String getNombre() {
@@ -61,6 +65,10 @@ public class Guarderia extends PanacheEntityBase {
         return this.direccion;
     }
 
+    public boolean getEstado() {
+        return this.estado;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -83,5 +91,9 @@ public class Guarderia extends PanacheEntityBase {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }
