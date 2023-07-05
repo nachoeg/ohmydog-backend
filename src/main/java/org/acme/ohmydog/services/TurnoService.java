@@ -30,6 +30,9 @@ public class TurnoService {
     @Inject
     UsuarioRepository usuarioRepository;
 
+    @Inject
+    PerroService perroService;
+
     @Transactional
     public boolean register(TurnoRequest turnoRequest) throws ExcepcionCastrado, ExcepcionTurno {
         Perro perro = perroRepository.buscarPerroPorId(turnoRequest.getIdPerro());
@@ -73,6 +76,20 @@ public class TurnoService {
         turno.setFecha(fecha);
         turno.setMotivo(motivo);
         turno.setEstado(estado);
+        if (estado == "Asistio") {
+            Perro perro = perroRepository.buscarPerroPorId( idPerro );
+            switch (motivo){
+                case "Vacuna Antirrabica":
+                    perroService.modificarPerro(perro.getId(), perro.getNombre(), perro.getRaza(), perro.getEdad(), perro.getEnfermedad(),perro.getSexo(), perro.getCaracteristicas(), perro.getCastrado(), fecha, perro.getVacunaAntienfermedades());
+                    break;
+                case "Vacuna Antienfermedades":
+                    perroService.modificarPerro(perro.getId(), perro.getNombre(), perro.getRaza(), perro.getEdad(), perro.getEnfermedad(),perro.getSexo(), perro.getCaracteristicas(), perro.getCastrado(), perro.getVacunaAntirrabica(), fecha);
+                    break;
+                case "Castracion":
+                    perroService.modificarPerro(perro.getId(), perro.getNombre(), perro.getRaza(), perro.getEdad(), perro.getEnfermedad(),perro.getSexo(), perro.getCaracteristicas(), true, perro.getVacunaAntirrabica(), perro.getVacunaAntienfermedades());
+                    break;
+            }
+        }
         turnoRepository.persist(turno);
         return true;
     }
