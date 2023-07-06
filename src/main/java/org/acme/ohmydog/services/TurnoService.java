@@ -76,9 +76,9 @@ public class TurnoService {
         turno.setFecha(fecha);
         turno.setMotivo(motivo);
         turno.setEstado(estado);
-        if (estado == "Asistio") {
+        if (Objects.equals(estado, "Asistio")) {
             Perro perro = perroRepository.buscarPerroPorId( idPerro );
-            switch (motivo){
+            switch (motivo) {
                 case "Vacuna Antirrabica":
                     perroService.modificarPerro(perro.getId(), perro.getNombre(), perro.getRaza(), perro.getEdad(), perro.getEnfermedad(),perro.getSexo(), perro.getCaracteristicas(), perro.getCastrado(), fecha, perro.getVacunaAntienfermedades());
                     break;

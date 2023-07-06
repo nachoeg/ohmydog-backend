@@ -14,6 +14,7 @@ C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\entities\Turno.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\services\AuthService.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\repository\PaseadorRepository.java
+C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\excepciones\ExcepcionNombrePerro.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\services\GuarderiaService.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\services\PerroService.java
 C:\Facultad\3erAño\1erSemestre\ING2\Practica\Aplicacion\ohmydog_backend\src\main\java\org\acme\ohmydog\MiApp.java

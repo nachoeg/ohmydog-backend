@@ -48,6 +48,5 @@ public class MiApp {
                 usuario1.agregarPerro(perro1);
                 usuario2.agregarPerro(perro2);
                 usuario2.agregarPerro(perro3);
-
         }
 }
