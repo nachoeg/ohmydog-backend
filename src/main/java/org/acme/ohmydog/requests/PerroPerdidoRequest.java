@@ -3,10 +3,15 @@ package org.acme.ohmydog.requests;
 import java.time.LocalDate;
 
 public class PerroPerdidoRequest {
+    private Long idUsuario;
     private String nombre;
     private String zona;
     private LocalDate fecha;
     private String email;
+
+    public Long getIdUsuario() {
+        return this.idUsuario;
+    }
 
     public String getNombre() {
         return this.nombre;

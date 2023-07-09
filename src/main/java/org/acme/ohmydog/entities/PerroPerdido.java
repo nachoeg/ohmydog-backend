@@ -11,6 +11,8 @@ public class PerroPerdido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "idUsuario")
+    private Long idUsuario;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "zona")
@@ -25,12 +27,18 @@ public class PerroPerdido {
     public PerroPerdido() {
     }
 
-    public PerroPerdido(String nombre, String zona, LocalDate fecha, String email) {
+    public PerroPerdido(Long idUsuario, String nombre, String zona, LocalDate fecha, String email) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.zona = zona;
         this.fecha = fecha;
         this.email = email;
         this.estado = "Pendiente";
+    }
+
+
+    public Long getIdUsuario(){
+        return this.idUsuario;
     }
 
     public String getNombre() {
