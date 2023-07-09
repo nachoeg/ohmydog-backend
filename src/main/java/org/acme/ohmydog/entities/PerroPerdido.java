@@ -13,8 +13,6 @@ public class PerroPerdido {
     private Long id;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "raza")
-    private String raza;
     @Column(name = "zona")
     private String zona;
     @Column(name = "fecha")
@@ -27,9 +25,8 @@ public class PerroPerdido {
     public PerroPerdido() {
     }
 
-    public PerroPerdido(String nombre, String raza, String zona, LocalDate fecha, String email) {
+    public PerroPerdido(String nombre, String zona, LocalDate fecha, String email) {
         this.nombre = nombre;
-        this.raza = raza;
         this.zona = zona;
         this.fecha = fecha;
         this.email = email;
@@ -38,10 +35,6 @@ public class PerroPerdido {
 
     public String getNombre() {
         return this.nombre;
-    }
-
-    public String getRaza() {
-        return this.raza;
     }
 
     public String getZona() {
@@ -62,10 +55,6 @@ public class PerroPerdido {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setRaza(String raza) {
-        this.raza = raza;
     }
 
     public void setZona(String zona) {

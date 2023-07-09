@@ -16,8 +16,7 @@ public class PerroPerdidoService {
 
     @Transactional
     public boolean register(PerroPerdidoRequest perroPerdidoRequest) {
-        PerroPerdido perroPerdido = perroPerdidoRepository.register(perroPerdidoRequest.getNombre(),
-                perroPerdidoRequest.getRaza(), perroPerdidoRequest.getZona(), perroPerdidoRequest.getFecha(),
+        PerroPerdido perroPerdido = perroPerdidoRepository.register(perroPerdidoRequest.getNombre(), perroPerdidoRequest.getZona(), perroPerdidoRequest.getFecha(),
                 perroPerdidoRequest.getEmail());
         return true;
     }
@@ -29,7 +28,6 @@ public class PerroPerdidoService {
             return false;
         }
         perroPerdido.setNombre(perroPerdidoRequest.getNombre());
-        perroPerdido.setRaza(perroPerdidoRequest.getRaza());
         perroPerdido.setZona(perroPerdidoRequest.getZona());
         perroPerdido.setFecha(perroPerdidoRequest.getFecha());
         perroPerdido.setEmail(perroPerdidoRequest.getEmail());
