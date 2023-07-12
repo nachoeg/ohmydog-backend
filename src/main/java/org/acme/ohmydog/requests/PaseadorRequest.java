@@ -7,7 +7,12 @@ public class PaseadorRequest {
     private Long telefono;
     private String email;
     private String zona;
+    private String tipo;
     private boolean estado;
+
+    public String getTipo() {
+        return this.tipo;
+    }
 
     public String getNombre() {
         return this.nombre;

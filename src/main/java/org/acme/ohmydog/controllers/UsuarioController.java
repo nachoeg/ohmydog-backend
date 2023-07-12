@@ -126,6 +126,22 @@ public class UsuarioController {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
+    /**
+     * Devuelve una lista de todos los usuarios en la base de datos.
+     *
+     * @return Lista de usuarios
+     */
+    @GET
+    @Path("/usuariosBorrados")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response listarUsuariosBorrados(@HeaderParam("token") String token) {
+        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
+            return Response.ok(usuarioService.listarUsuariosBorrados()).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
     @PUT
     @Path("/changePassword/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -158,5 +174,21 @@ public class UsuarioController {
             return Response.ok(usuarioService.buscarUsuarioPorId(id)).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    // Endpoint para recuperar los usuarios borrados
+    @PUT
+    @Path("/recover/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response recuperarCampania(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if ((authService.isLoggedIn(token)) && (authService.esVeterinario())) {
+            if (usuarioService.recuperarUsuario(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

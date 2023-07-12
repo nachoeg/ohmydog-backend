@@ -37,8 +37,8 @@ public class PaseadorController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response modificarPaseador(@HeaderParam("token") String token, @PathParam("id") Long id,
-                                      PaseadorRequest paseadorRequest) {
-        if (authService.isLoggedIn(token)) {
+            PaseadorRequest paseadorRequest) {
+        if (authService.isLoggedIn(token) && (authService.esVeterinario())) {
             if (paseadorService.modificarPaseador(id, paseadorRequest)) {
                 return Response.ok().build();
             } else {
@@ -66,10 +66,41 @@ public class PaseadorController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response listarPaseador(@HeaderParam("token") String token) {
+    public Response listarPaseador() {
+        return Response.ok(paseadorService.listarPaseador()).build();
+    }
+
+    // Endpoint para listar los borrados o no disponibles
+    @GET
+    @Path("/borrados")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response listarPaseadoresBorrados() {
+        return Response.ok(paseadorService.listarPaseadoresBorrados()).build();
+    }
+
+    // Endpoint para recuperar los borrados
+    @PUT
+    @Path("/recover/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response recuperar(@HeaderParam("token") String token, @PathParam("id") Long id) {
         if (authService.isLoggedIn(token)) {
-            return Response.ok(paseadorService.listarPaseador()).build();
+            if (paseadorService.recuperar(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    // Endpoint para listar los borrados o no disponibles
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response obtenerPaseadorPorId(@PathParam("id") Long id) {
+        return Response.ok(paseadorService.buscarPaseadorPorId(id)).build();
     }
 }

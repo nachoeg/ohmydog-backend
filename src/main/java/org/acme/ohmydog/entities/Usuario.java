@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una tabla en la base de datos
+@Entity // Indicia que la clase Usuario es una entidad, por lo que esta asociada a una
+        // tabla en la base de datos
 @Table(name = "USUARIO")
 public class Usuario extends PanacheEntityBase {
     @Id
@@ -33,12 +34,14 @@ public class Usuario extends PanacheEntityBase {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "usuario_id")
     private List<Perro> perros;
+    @Column(name = "borrado")
+    private boolean borrado;
 
     public Usuario() {
     }
 
     public Usuario(String email, String password, String nombre, String apellido, Long dni, String localidad,
-                   String direccion, Long telefono, String rol) {
+            String direccion, Long telefono, String rol) {
         this.email = email;
         this.password = password;
         this.nombre = nombre;
@@ -51,9 +54,21 @@ public class Usuario extends PanacheEntityBase {
         this.perros = new ArrayList<>();
     }
 
-    public boolean esVeterinario() { return Objects.equals(this.rol, "veterinario"); }
+    public boolean getBorrado() {
+        return this.borrado;
+    }
 
-    public boolean esCliente() { return Objects.equals(this.rol, "cliente"); }
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
+    public boolean esVeterinario() {
+        return Objects.equals(this.rol, "veterinario");
+    }
+
+    public boolean esCliente() {
+        return Objects.equals(this.rol, "cliente");
+    }
 
     public void agregarPerro(Perro perro) {
         this.perros.add(perro);
@@ -111,7 +126,7 @@ public class Usuario extends PanacheEntityBase {
         return this.rol;
     }
 
-    public List<Perro> getPerros(){
+    public List<Perro> getPerros() {
         return this.perros;
     }
 

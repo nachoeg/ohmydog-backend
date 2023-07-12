@@ -22,21 +22,39 @@ public class Paseador extends PanacheEntityBase {
     private String email;
     @Column(name = "zona")
     private String zona;
+    @Column(name = "tipo")
+    private String tipo;
     @Column(name = "estado")
     private boolean estado;
+    @Column(name = "borrado")
+    private boolean borrado;
 
     public Paseador() {
 
     }
 
-    public Paseador(String nombre, String apellido, Long dni, Long telefono, String email, String zona) {
+    public Paseador(String nombre, String apellido, Long dni, Long telefono, String email, String zona, String tipo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
         this.email = email;
         this.zona = zona;
+        this.tipo = tipo;
         this.estado = true;
+        this.borrado = false;
+    }
+
+    public boolean getBorrado() {
+        return this.borrado;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getTipo() {
+        return this.tipo;
     }
 
     public String getNombre() {
@@ -93,5 +111,9 @@ public class Paseador extends PanacheEntityBase {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
     }
 }

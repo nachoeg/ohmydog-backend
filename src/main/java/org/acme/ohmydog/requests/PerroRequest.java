@@ -14,6 +14,7 @@ public class PerroRequest {
     private boolean castrado;
     private LocalDate vacunaAntirrabica;
     private LocalDate vacunaAntienfemerdades;
+    private boolean disponibleCruza;
 
     public PerroRequest(Long idUsuario, String nombre, String raza, int edad, String enfermedad,
             String sexo, String caracteristicas, boolean castrado, LocalDate vacunaAntirrabica,
@@ -28,6 +29,10 @@ public class PerroRequest {
         this.castrado = castrado;
         this.vacunaAntirrabica = vacunaAntirrabica;
         this.vacunaAntienfemerdades = vacunaAntienfermedades;
+    }
+
+    public boolean getDisponibleCruza() {
+        return this.disponibleCruza;
     }
 
     public Long getIdUsuario() {

@@ -4,7 +4,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.acme.ohmydog.excepciones.ExcepcionNombrePerro;
 import org.acme.ohmydog.requests.PerroRequest;
 import org.acme.ohmydog.services.PerroService;
 import org.acme.ohmydog.services.AuthService;
@@ -23,18 +22,14 @@ public class PerroController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("token") String token, PerroRequest perroRequest) {
-        try {
-            if ((authService.isLoggedIn(token) && (authService.esVeterinario()))) {
-                if (perroService.register(perroRequest)) {
-                    return Response.ok().build();
-                } else {
-                    return Response.status(Response.Status.BAD_REQUEST).build();
-                }
+        if ((authService.isLoggedIn(token) && (authService.esVeterinario()))) {
+            if (perroService.register(perroRequest)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
             }
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (ExcepcionNombrePerro e) {
-            return Response.status(Response.Status.FORBIDDEN).build();
         }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PUT
@@ -93,6 +88,17 @@ public class PerroController {
     }
 
     @GET
+    @Path("/perrosBorrados")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response listarPerrosBorrados(@HeaderParam("token") String token) {
+        if (authService.isLoggedIn(token)) {
+            return Response.ok(perroService.listarPerrosBorrados()).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @GET
     @Path("/perroPorId/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -101,5 +107,63 @@ public class PerroController {
             return Response.ok(perroService.buscarPerroPorId(id)).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @PUT
+    @Path("/cruzar/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response cambiarDisponibilidadDeCruza(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token)) {
+            if (perroService.cruzar(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @GET
+    @Path("/disponiblesCruza/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getPerrosParaCruzaPorDuenio(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (authService.isLoggedIn(token)) {
+            return Response.ok(perroService.getPerrosDisponibleParaCruza(id)).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    @GET
+    @Path("/disponiblesCruza")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getTodosLosPerrosDisponibleParaCruza(@HeaderParam("token") String token) {
+        return Response.ok(perroService.getTodosLosPerrosDisponibleParaCruza()).build();
+    }
+
+    @GET
+    @Path("/opcionesCruza/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getOpcionesCruza(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        return Response.ok(perroService.getOpcionesCruza(id)).build();
+    }
+
+    // Endpoint para recuperar las campanias borradas
+    @PUT
+    @Path("/recover/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response recuperarPerro(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if ((authService.isLoggedIn(token)) && (authService.esVeterinario())) {
+            if (perroService.recuperarPerro(id)) {
+                return Response.ok().build();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }
