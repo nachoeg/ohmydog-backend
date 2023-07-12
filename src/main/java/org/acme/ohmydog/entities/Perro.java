@@ -30,6 +30,10 @@ public class Perro extends PanacheEntityBase {
     private String caracteristicas;
     @Column(name = "castrado")
     private boolean castrado;
+    @Column(name = "disponibleCruza")
+    private boolean disponibleCruza; // Indica si esta disponible para cruzas
+    @Column(name = "borrado")
+    private boolean borrado; // Indica si fue borrado logicamente
 
     @Column(name = "vacunaAntirrabica")
     private LocalDate vacunaAntirrabica;
@@ -60,6 +64,24 @@ public class Perro extends PanacheEntityBase {
         this.vacunaAntirrabica = null;
         this.vacunaAntienfermedades = null;
         this.castrado = false;
+        this.disponibleCruza = false;
+        this.borrado = false;
+    }
+
+    public boolean getBorrado() {
+        return this.borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
+    public boolean getDisponibleCruza() {
+        return this.disponibleCruza;
+    }
+
+    public void setDisponibleCruza(boolean disponibilidad) {
+        disponibleCruza = disponibilidad;
     }
 
     public Long getId() {
@@ -105,9 +127,13 @@ public class Perro extends PanacheEntityBase {
         this.castrado = true;
     }
 
-    public void vacunarAntirrabica(LocalDate fecha) { this.vacunaAntirrabica = fecha; }
+    public void vacunarAntirrabica(LocalDate fecha) {
+        this.vacunaAntirrabica = fecha;
+    }
 
-    public void vacunarAntienfermedades(LocalDate fecha) { this.vacunaAntirrabica = fecha; }
+    public void vacunarAntienfermedades(LocalDate fecha) {
+        this.vacunaAntirrabica = fecha;
+    }
 
     public boolean puedeTomarTurno(String motivo) {
         Turno turno = this.turnos.stream()
@@ -162,6 +188,10 @@ public class Perro extends PanacheEntityBase {
 
     public String getUsuarioNombreyApellido() {
         return this.usuario.getNombre() + " " + this.usuario.getApellido();
+    }
+
+    public Long getUsuarioTelefono() {
+        return this.usuario.getTelefono();
     }
 
     public void setId(Long id) {

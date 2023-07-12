@@ -20,8 +20,10 @@ public class PaseadorService {
         if (paseadorRepository.buscarPaseadorPorEmail(paseadorRequest.getEmail()) != null) {
             return false;
         }
-        paseadorRepository.register(paseadorRequest.getNombre(), paseadorRequest.getApellido(), paseadorRequest.getDni(),
-                paseadorRequest.getTelefono(), paseadorRequest.getEmail(), paseadorRequest.getZona());
+        paseadorRepository.register(paseadorRequest.getNombre(), paseadorRequest.getApellido(),
+                paseadorRequest.getDni(),
+                paseadorRequest.getTelefono(), paseadorRequest.getEmail(), paseadorRequest.getZona(),
+                paseadorRequest.getTipo());
         return true;
     }
 
@@ -55,5 +57,21 @@ public class PaseadorService {
     @Transactional
     public List<Paseador> listarPaseador() {
         return paseadorRepository.listarPaseador();
+    }
+
+    @Transactional
+    public List<Paseador> listarPaseadoresBorrados() {
+        return paseadorRepository.listarPaseadoresBorrados();
+    }
+
+    @Transactional
+    public boolean recuperar(Long id) {
+        return paseadorRepository.recuperar(id);
+    }
+
+    @Transactional
+    public Paseador buscarPaseadorPorId(Long id) {
+        Paseador paseador = paseadorRepository.buscarPaseadorPorId(id);
+        return paseador;
     }
 }

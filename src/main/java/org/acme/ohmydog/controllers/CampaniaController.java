@@ -76,7 +76,7 @@ public class CampaniaController {
             if (campaniaService.recuperarCampania(id)) {
                 return Response.ok().build();
             } else {
-                return Response.ok().build();
+                return Response.status(Response.Status.BAD_REQUEST).build();
             }
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

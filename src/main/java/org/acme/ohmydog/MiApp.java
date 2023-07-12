@@ -10,6 +10,7 @@ import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.entities.Usuario;
 import org.acme.ohmydog.entities.Campania;
+import org.acme.ohmydog.entities.Paseador;
 
 import java.time.LocalDate;
 
@@ -48,5 +49,15 @@ public class MiApp {
                 usuario1.agregarPerro(perro1);
                 usuario2.agregarPerro(perro2);
                 usuario2.agregarPerro(perro3);
+
+                // Agregar cuidador/paseador para pruebas:
+                Paseador paseador = new Paseador("Paseador1", "Gomez", 42396050L, 2213037663L, "juanpablo.c@gmail.com",
+                                "Los hornos",
+                                "Paseador");
+                Paseador cuidador = new Paseador("Cuidador1", "Gomez", 42656045L, 2213067344L, "cuidador1231@gmail.com",
+                                "Ensenada",
+                                "Cuidador");
+                entityManager.persist(paseador);
+                entityManager.persist(cuidador);
         }
 }
