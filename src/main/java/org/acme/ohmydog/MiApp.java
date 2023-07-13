@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.acme.ohmydog.entities.Perro;
 import org.acme.ohmydog.entities.Turno;
 import org.acme.ohmydog.entities.Usuario;
+import org.acme.ohmydog.entities.Bouchers;
 import org.acme.ohmydog.entities.Campania;
 import org.acme.ohmydog.entities.Paseador;
 
@@ -41,6 +42,10 @@ public class MiApp {
                 entityManager.persist(usuario2);
                 entityManager.persist(usuario3);
 
+                // Entidad necesaria para el sistema de bouchers.
+                Bouchers boucher = new Bouchers();
+                entityManager.persist(boucher);
+
                 Perro perro1 = new Perro("Perro1", "Raza1", 6, "Ninguna", "Masculino", "Caracteristicas");
                 Perro perro2 = new Perro("Perro2", "Raza2", 4, "Ninguna", "Masculino", "Caracteristicas");
                 Perro perro3 = new Perro("Perro3", "Raza3", 1, "Ninguna", "Masculino", "Caracteristicas");
@@ -59,5 +64,6 @@ public class MiApp {
                                 "Cuidador");
                 entityManager.persist(paseador);
                 entityManager.persist(cuidador);
+
         }
 }
