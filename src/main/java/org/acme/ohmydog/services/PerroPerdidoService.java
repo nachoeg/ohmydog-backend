@@ -17,7 +17,7 @@ public class PerroPerdidoService {
     @Transactional
     public boolean register(PerroPerdidoRequest perroPerdidoRequest) {
         PerroPerdido perroPerdido = perroPerdidoRepository.register(perroPerdidoRequest.getIdUsuario(),perroPerdidoRequest.getNombre(), perroPerdidoRequest.getZona(), perroPerdidoRequest.getFecha(),
-        perroPerdidoRequest.getEmail());
+        perroPerdidoRequest.getEmail(), perroPerdidoRequest.getDescripcion());
         return true;
     }
 
@@ -31,6 +31,7 @@ public class PerroPerdidoService {
         perroPerdido.setZona(perroPerdidoRequest.getZona());
         perroPerdido.setFecha(perroPerdidoRequest.getFecha());
         perroPerdido.setEmail(perroPerdidoRequest.getEmail());
+        perroPerdido.setDescripcion(perroPerdidoRequest.getDescripcion());
         perroPerdidoRepository.persist(perroPerdido);
         return true;
     }
@@ -42,6 +43,17 @@ public class PerroPerdidoService {
             return false;
         }
         perroPerdidoRepository.eliminate(perroPerdido);
+        return true;
+    }
+
+    @Transactional
+    public boolean marcarPerroEncontrado(Long id) {
+        PerroPerdido perroPerdido = perroPerdidoRepository.buscarPerroPorId(id);
+        if (perroPerdido == null) {
+            return false;
+        }
+        perroPerdido.setEstado("Encontrado");
+        perroPerdidoRepository.persist(perroPerdido);
         return true;
     }
 

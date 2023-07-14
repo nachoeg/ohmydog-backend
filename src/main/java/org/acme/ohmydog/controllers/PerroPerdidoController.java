@@ -33,8 +33,19 @@ public class PerroPerdidoController {
     @Path("/delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response eliminarPerroPerdido(@PathParam("id") Long id) {
+    public Response eliminarPerroPerdido(@HeaderParam("token") String token, @PathParam("id") Long id) {
         if (perroPerdidoService.eliminarPerroPerdido(id)) {
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
+    @POST
+    @Path("/found/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response marcarPerroEncontrado(@HeaderParam("token") String token, @PathParam("id") Long id) {
+        if (perroPerdidoService.marcarPerroEncontrado(id)) {
             return Response.ok().build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

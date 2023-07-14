@@ -8,6 +8,11 @@ public class PerroPerdidoRequest {
     private String zona;
     private LocalDate fecha;
     private String email;
+    private String descripcion;
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
 
     public Long getIdUsuario() {
         return this.idUsuario;
