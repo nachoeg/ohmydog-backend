@@ -124,6 +124,14 @@ public class UsuarioService {
         if (usuario == null) {
             return false; // No se encontró el usuario con el id especificado
         }
+
+        List<Perro> perros = usuario.getPerros();
+        for (Perro p : perros) {
+            // recupera sus perros
+            p.setBorrado(false);
+            perroRepository.persist(p);
+        }
+
         usuario.setBorrado(false);
         usuarioRepository.persist(usuario);
         return true;
