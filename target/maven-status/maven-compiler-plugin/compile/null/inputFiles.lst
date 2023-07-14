@@ -20,6 +20,7 @@ C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmy
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\repository\UsuarioRepository.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\services\PerroService.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\UsuarioRequest.java
+C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\controllers\BoucherController.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\PerroRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\entities\Guarderia.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\controllers\GuarderiaController.java
@@ -31,10 +32,12 @@ C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmy
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\PerroEnAdopcionRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\repository\CuidadorRepository.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\controllers\CuidadorController.java
+C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\entities\Bouchers.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\entities\Turno.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\CampaniaRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\excepciones\ExcepcionNombrePerro.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\entities\Campania.java
+C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\repository\BoucherRepository.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\CuidadorRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\repository\PerroPerdidoRepository.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\services\PerroPerdidoService.java
@@ -42,6 +45,7 @@ C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmy
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\entities\Cuidador.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\PaseadorRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\excepciones\ExcepcionTurno.java
+C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\services\BoucherService.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\PerroPerdidoRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\requests\GuarderiaRequest.java
 C:\Users\USER\Desktop\Cambiando\ohmydog_backend-main\src\main\java\org\acme\ohmydog\repository\PerroEnAdopcionRepository.java
