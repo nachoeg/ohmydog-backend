@@ -5,7 +5,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.ohmydog.requests.GuarderiaRequest;
-import org.acme.ohmydog.requests.GuarderiaRequest;
 import org.acme.ohmydog.services.AuthService;
 import org.acme.ohmydog.services.GuarderiaService;
 
@@ -32,12 +31,13 @@ public class GuarderiaController {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
     @PUT
     @Path("/modify/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response modificarGuarderia(@HeaderParam("token") String token, @PathParam("id") Long id,
-                                      GuarderiaRequest guarderiaRequest) {
+            GuarderiaRequest guarderiaRequest) {
         if (authService.isLoggedIn(token)) {
             if (guarderiaService.modificarGuarderia(id, guarderiaRequest)) {
                 return Response.ok().build();

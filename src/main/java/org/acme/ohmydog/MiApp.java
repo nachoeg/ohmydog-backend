@@ -65,5 +65,11 @@ public class MiApp {
                 entityManager.persist(paseador);
                 entityManager.persist(cuidador);
 
+                LocalDate fecha = LocalDate.of(2023, 7, 12);
+                // Agregar campania pasada para pruebas
+                Campania campania1 = new Campania("Campania1", "Motivo1", 1234L, 1234567L, "campania1@gmail.com", fecha,
+                                fecha);
+                entityManager.persist(campania1);
+
         }
 }

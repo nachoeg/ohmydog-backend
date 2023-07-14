@@ -56,7 +56,11 @@ public class CampaniaRepository implements PanacheRepository<Campania> {
         LocalDate fechaActual = LocalDate.now();
         for (Campania campania : campanias) {
             LocalDate fechaFin = campania.getFechaFin();
-            if (campania.isBorrado() || fechaFin.isBefore(fechaActual)) {
+            if (fechaFin != null) {
+                if (campania.isBorrado() || fechaFin.isBefore(fechaActual)) {
+                    campaniasBorradas.add(campania);
+                }
+            } else if (fechaFin == null && campania.isBorrado()) {
                 campaniasBorradas.add(campania);
             }
         }
