@@ -181,7 +181,7 @@ public class UsuarioController {
     @Path("/recover/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response recuperarCampania(@HeaderParam("token") String token, @PathParam("id") Long id) {
+    public Response recuperarUsuario(@HeaderParam("token") String token, @PathParam("id") Long id) {
         if ((authService.isLoggedIn(token)) && (authService.esVeterinario())) {
             if (usuarioService.recuperarUsuario(id)) {
                 return Response.ok().build();
