@@ -26,14 +26,14 @@ public class MiApp {
                 Usuario admin = new Usuario("admin@mail.com", "0", "admin", "admin", 0L, "Localidad0", "Direccion0",
                                 123456789L,
                                 "veterinario");
-                Usuario usuario1 = new Usuario("usuario1@mail.com", "1", "usuario1", "1", 1L, "Localidad1",
-                                "Direccion1",
+                Usuario usuario1 = new Usuario("usuario1@mail.com", "1", "Ignacio", "Escudero", 48521541L, "City Bell",
+                                "455 esq. 24",
                                 123456789L, "cliente");
-                Usuario usuario2 = new Usuario("usuario2@mail.com", "2", "usuario2", "2", 2L, "Localidad2",
-                                "Direccion2",
+                Usuario usuario2 = new Usuario("usuario2@mail.com", "2", "Jorge", "García", 28489524L, "La Plata",
+                                "20 y 50",
                                 223456789L, "cliente");
-                Usuario usuario3 = new Usuario("usuario3@mail.com", "3", "usuario3", "3", 3L, "Localidad3",
-                                "Direccion3",
+                Usuario usuario3 = new Usuario("usuario3@mail.com", "3", "Pedro", "Perez", 34789522L, "Gonnet",
+                                "Centernario y 505",
                                 323456789L, "cliente");
 
                 // Persistir el usuario en la base de datos
@@ -46,9 +46,9 @@ public class MiApp {
                 Bouchers boucher = new Bouchers();
                 entityManager.persist(boucher);
 
-                Perro perro1 = new Perro("Perro1", "Raza1", 6, "Ninguna", "Masculino", "Caracteristicas");
-                Perro perro2 = new Perro("Perro2", "Raza2", 4, "Ninguna", "Masculino", "Caracteristicas");
-                Perro perro3 = new Perro("Perro3", "Raza3", 1, "Ninguna", "Masculino", "Caracteristicas");
+                Perro perro1 = new Perro("Kala", "Giant Schnauzer", 6, "", "Hembra", "");
+                Perro perro2 = new Perro("Lobo", "German Shepherd", 4, "", "Macho", "");
+                Perro perro3 = new Perro("Titan", "Golden Retriever", 1, "", "Macho", "");
                 entityManager.persist(perro1);
                 entityManager.persist(perro2);
                 usuario1.agregarPerro(perro1);
@@ -56,10 +56,10 @@ public class MiApp {
                 usuario2.agregarPerro(perro3);
 
                 // Agregar cuidador/paseador para pruebas:
-                Paseador paseador = new Paseador("Paseador1", "Gomez", 42396050L, 2213037663L, "juanpablo.c@gmail.com",
+                Paseador paseador = new Paseador("Hernesto", "Gomez", 42396050L, 2213037663L, "hernestogomez@mail.com",
                                 "Los hornos",
                                 "Paseador");
-                Paseador cuidador = new Paseador("Cuidador1", "Gomez", 42656045L, 2213067344L, "cuidador1231@gmail.com",
+                Paseador cuidador = new Paseador("Pablo", "Perez", 42656045L, 2213067344L, "pabloperez@mail.com",
                                 "Ensenada",
                                 "Cuidador");
                 entityManager.persist(paseador);
@@ -67,7 +67,7 @@ public class MiApp {
 
                 LocalDate fecha = LocalDate.of(2023, 7, 12);
                 // Agregar campania pasada para pruebas
-                Campania campania1 = new Campania("Campania1", "Motivo1", 1234L, 1234567L, "campania1@gmail.com", fecha,
+                Campania campania1 = new Campania("Campania", "Motivo", 1234L, 1234567L, "campania@mail.com", fecha,
                                 fecha);
                 entityManager.persist(campania1);
 
