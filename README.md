@@ -1,5 +1,5 @@
 # Oh My Dog!
-Explicación del proyecto [acá](https://github.com/nachoeg/ohmydog-frontend).
+Aplicacion frontend [acá](https://github.com/nachoeg/ohmydog-frontend).
 
 ## Correr la apliación
 Los pasos para correr la aplicación:
